@@ -16,8 +16,8 @@ const FavoriteMoviesPageLayout: FC<FavoriteMoviesPageLayoutProps> = ({
   currentPage,
   favoriteMovies,
   list,
+  handleRemoveMovieFromFavorite,
   isAddMovieToFavorite,
-  handleFindMovie,
   handlePageChange,
 }) => {
   return (
@@ -30,7 +30,7 @@ const FavoriteMoviesPageLayout: FC<FavoriteMoviesPageLayoutProps> = ({
             {favoriteMovies?.length ? (
               <>
                 <Heading
-                  text="Фильмы"
+                  text="Мои фильмы"
                   className="mb-10 text-[32px] font-bold xl:mb-5 lg:text-[24px] sm:mb-3 sm:text-[18px]"
                 />
 
@@ -55,8 +55,10 @@ const FavoriteMoviesPageLayout: FC<FavoriteMoviesPageLayoutProps> = ({
                           date={release_date}
                           popularity={popularity}
                           list={genre_ids}
-                          isRated={isAddMovieToFavorite(id)}
-                          handleClick={() => handleFindMovie(id)}
+                          isFavorite={isAddMovieToFavorite(id)}
+                          handleRemoveMovie={() =>
+                            handleRemoveMovieFromFavorite(id)
+                          }
                         />
                       );
                     },

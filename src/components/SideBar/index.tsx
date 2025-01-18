@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Box, UnstyledButton } from "@mantine/core";
 
+import { ROUTES } from "../../routes/routeNames";
+
 import { useLazySearchMoviesByTitleQuery } from "../../store/movies.api";
 
 import { useDebounce, useInput } from "../../hooks";
@@ -44,9 +46,9 @@ const SideBar = () => {
       </Box>
       <Box className="mb-8 flex flex-col flex-wrap gap-2 xl:mb-0 xl:flex-row">
         <Link
-          to="/"
+          to={ROUTES.HOME_PAGE}
           className={
-            pathname === "/"
+            pathname === ROUTES.HOME_PAGE
               ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
               : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
           }
@@ -56,7 +58,7 @@ const SideBar = () => {
         <CustomMenu>
           <UnstyledButton
             className={
-              pathname === "/movies"
+              pathname === ROUTES.MOVIES_PAGE
                 ? "rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
                 : "rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
             }
@@ -65,9 +67,9 @@ const SideBar = () => {
           </UnstyledButton>
         </CustomMenu>
         <Link
-          to="/trending"
+          to={ROUTES.TRENDING_MOVIES_PAGE}
           className={
-            pathname === "/trending"
+            pathname === ROUTES.TRENDING_MOVIES_PAGE
               ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
               : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
           }
@@ -75,9 +77,9 @@ const SideBar = () => {
           В тренде
         </Link>
         <Link
-          to="/favorites"
+          to={ROUTES.FAVORITE_MOVIES_PAGE}
           className={
-            pathname === "/favorites"
+            pathname === ROUTES.FAVORITE_MOVIES_PAGE
               ? "rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
               : "rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
           }

@@ -41,7 +41,6 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
   yearPickerValue,
   currentPage,
   movieTitle,
-  movieId,
   moviesList,
   genres,
   handleFormSubmit,
@@ -51,9 +50,9 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
   handleSortValueChange,
   handleYearPickerValueChange,
   handleModalClose,
-  handleAddFavoriteMovie,
+  handleAddMovieToFavorite,
+  handleRemoveMovieFromFavorite,
   isAddMovieToFavorite,
-  handleFindMovie,
   handlePageChange,
 }) => {
   return (
@@ -189,8 +188,9 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
                               date={release_date}
                               popularity={popularity}
                               list={genre_ids}
-                              isRated={isAddMovieToFavorite(id)}
-                              handleClick={() => handleFindMovie(id)}
+                              isFavorite={isAddMovieToFavorite(id)}
+                              handleAddMovie={() => handleAddMovieToFavorite(id)}
+                              handleRemoveMovie={() => handleRemoveMovieFromFavorite(id)}
                             />
                           );
                         },

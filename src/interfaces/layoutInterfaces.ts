@@ -27,7 +27,6 @@ export interface HomePageLayoutProps {
   yearPickerValue: DateValue | number;
   currentPage: number;
   movieTitle: string;
-  movieId: number;
   moviesList: IMovie[];
   genres: IGenre[];
   handleFormSubmit: (e: globalThis.KeyboardEvent) => void;
@@ -37,9 +36,9 @@ export interface HomePageLayoutProps {
   handleSortValueChange: (value: string) => void;
   handleYearPickerValueChange: (value: DateValue) => void;
   handleModalClose: () => void;
-  handleAddFavoriteMovie: (id: number) => void;
+  handleAddMovieToFavorite: (id: number) => void;
+  handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
-  handleFindMovie: (id: number) => void;
   handlePageChange: (page: number) => void;
 }
 
@@ -61,9 +60,9 @@ export interface MoviesPageLayoutProps {
   currentPage: number;
   handlePageChange: (page: number) => void;
   handleModalClose: () => void;
-  handleAddFavoriteMovie: (id: number) => void;
+  handleAddMovieToFavorite: (id: number) => void;
+  handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
-  handleFindMovie: (id: number) => void;
 }
 
 export interface TrendingPageLayoutProps {
@@ -79,14 +78,13 @@ export interface TrendingPageLayoutProps {
     | undefined;
   totalPages: number;
   currentPage: number;
-  movieId: number;
   movieTitle: string;
   moviesList: IMovie[];
   isAddMovieToFavorite: (id: number) => boolean;
-  handleFindMovie: (id: number) => void;
   handlePageChange: (page: number) => void;
   handleModalClose: () => void;
-  handleAddFavoriteMovie: (id: number) => void;
+  handleAddMovieToFavorite: (id: number) => void;
+  handleRemoveMovieFromFavorite: (id: number) => void;
 }
 
 export interface FavoriteMoviesPageLayoutProps {
@@ -96,7 +94,7 @@ export interface FavoriteMoviesPageLayoutProps {
   currentPage: number;
   favoriteMovies: IMovie[];
   list: IMovie[];
+  handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
-  handleFindMovie: (id: number) => void;
   handlePageChange: (page: number) => void;
 }

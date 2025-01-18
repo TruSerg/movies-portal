@@ -6,17 +6,11 @@ import {
 } from "../../../store/movies.api";
 
 import {
-  findMovie,
   handleMoviesListChange,
 } from "../../../store/searchMoviesSlice";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
-import {
-  useFavoriteMovies,
-  useModal,
-  usePagination,
-  useVisible,
-} from "../../../hooks";
+import { useFavoriteMovies, useModal, usePagination } from "../../../hooks";
 
 import MoviesPageLayout from "../components/MoviesPageLayout";
 
@@ -26,9 +20,12 @@ const MoviesPageContainer = () => {
     useAppSelector((state) => state.searchMovies);
 
   const { currentPage, handlePageChange } = usePagination();
-  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useFavoriteMovies();
+  const {
+    handleAddFavoriteMovie,
+    handleRemoveFavoriteMovie,
+    isAddMovieToFavorite,
+  } = useFavoriteMovies();
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
-  const { isVisible, handleVisible, handleHidden } = useVisible();
 
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
 
@@ -43,23 +40,24 @@ const MoviesPageContainer = () => {
     },
   ] = useLazyGetMoviesByFilterQuery();
 
-  console.log("movies: ", movies);
-
   const totalPages = movies?.total_pages;
   const movieTitle = movie.title;
-  const movieId = movie.id;
 
-  useEffect(() => {
-    fetchMovies({ moviesFilterValue, currentPage });
-  }, [moviesFilterValue, currentPage]);
+  const handleAddMovieToFavorite = (id: number) => {
+    handleAddFavoriteMovie(id);
+  };
 
-  const handleFindMovie = (id: number) => {
-    dispatch(findMovie(id));
+  const handleRemoveMovieFromFavorite = (id: number) => {
+    handleRemoveFavoriteMovie(id);
   };
 
   useEffect(() => {
     dispatch(handleMoviesListChange(movies?.results));
   }, [dispatch, movies]);
+
+  useEffect(() => {
+    fetchMovies({ moviesFilterValue, currentPage });
+  }, [moviesFilterValue, currentPage]);
 
   return (
     <MoviesPageLayout
@@ -76,9 +74,9 @@ const MoviesPageContainer = () => {
       currentPage={currentPage}
       handlePageChange={handlePageChange}
       handleModalClose={handleModalClose}
-      handleAddFavoriteMovie={handleAddFavoriteMovie}
+      handleAddMovieToFavorite={handleAddMovieToFavorite}
+      handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
-      handleFindMovie={handleFindMovie}
     />
   );
 };

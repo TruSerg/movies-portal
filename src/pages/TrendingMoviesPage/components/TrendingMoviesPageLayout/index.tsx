@@ -21,14 +21,13 @@ const TrendingPageLayout: FC<TrendingPageLayoutProps> = ({
   isModalOpen,
   totalPages,
   currentPage,
-  movieId,
   movieTitle,
   moviesList,
   isAddMovieToFavorite,
-  handleFindMovie,
+  handleAddMovieToFavorite,
+  handleRemoveMovieFromFavorite,
   handlePageChange,
   handleModalClose,
-  handleAddFavoriteMovie,
 }) => {
   return (
     <>
@@ -72,8 +71,11 @@ const TrendingPageLayout: FC<TrendingPageLayoutProps> = ({
                             date={release_date}
                             popularity={popularity}
                             list={genre_ids}
-                            isRated={isAddMovieToFavorite(id)}
-                            handleClick={() => handleFindMovie(id)}
+                            isFavorite={isAddMovieToFavorite(id)}
+                            handleAddMovie={() => handleAddMovieToFavorite(id)}
+                            handleRemoveMovie={() =>
+                              handleRemoveMovieFromFavorite(id)
+                            }
                           />
                         );
                       },

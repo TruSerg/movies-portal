@@ -6,7 +6,6 @@ import {
 } from "../../../store/movies.api";
 
 import {
-  findMovie,
   handleMoviesListChange,
 } from "../../../store/searchMoviesSlice";
 
@@ -29,7 +28,11 @@ const HomePageContainer: FC = () => {
 
   const { moviesList, movie } = useAppSelector((state) => state.searchMovies);
 
-  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useFavoriteMovies();
+  const {
+    handleAddFavoriteMovie,
+    handleRemoveFavoriteMovie,
+    isAddMovieToFavorite,
+  } = useFavoriteMovies();
   const {
     moviesGenreValue,
     rateFrom,
@@ -99,16 +102,19 @@ const HomePageContainer: FC = () => {
   const searchMovies = movies?.results;
   const totalPages = movies?.total_pages;
   const movieTitle = movie.title;
-  const movieId = movie.id;
   const genresErrorChange = getRequestErrors(genresError);
+
+  const handleAddMovieToFavorite = (id: number) => {
+    handleAddFavoriteMovie(id);
+  };
+
+  const handleRemoveMovieFromFavorite = (id: number) => {
+    handleRemoveFavoriteMovie(id);
+  };
 
   useEffect(() => {
     dispatch(handleMoviesListChange(searchMovies));
   }, [dispatch, searchMovies]);
-
-  const handleFindMovie = (id: number) => {
-    dispatch(findMovie(id));
-  };
 
   return (
     <HomePageLayout
@@ -127,7 +133,6 @@ const HomePageContainer: FC = () => {
       yearPickerValue={yearPickerValue ? yearPickerValue : null}
       currentPage={currentPage}
       movieTitle={movieTitle}
-      movieId={movieId}
       moviesList={moviesList ? moviesList : []}
       genres={genres ? genres : []}
       handleFormSubmit={handleFormSubmit}
@@ -137,9 +142,9 @@ const HomePageContainer: FC = () => {
       handleSortValueChange={handleSortValueChange}
       handleYearPickerValueChange={handleYearPickerValueChange}
       handleModalClose={handleModalClose}
-      handleAddFavoriteMovie={handleAddFavoriteMovie}
+      handleAddMovieToFavorite={handleAddMovieToFavorite}
+      handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
-      handleFindMovie={handleFindMovie}
       handlePageChange={handlePageChange}
     />
   );

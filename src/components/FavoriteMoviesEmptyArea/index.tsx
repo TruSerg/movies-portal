@@ -5,7 +5,7 @@ import CustomLink from "../CustomLink";
 
 const FavoriteMoviesEmptyArea = () => (
   <Box className="flex min-h-[80vh] flex-col items-center justify-center">
-    <Box className="min-h-[500px] w-full max-w-[500px]">
+    <Box className="min-h-[500px] w-full max-w-[500px] text-center">
       <Image
         className="mb-5"
         src={FavoriteEmptyAreaImage}

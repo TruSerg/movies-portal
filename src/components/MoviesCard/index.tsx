@@ -1,12 +1,14 @@
 import { FC, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Image } from "@mantine/core";
 import { Box, Card, Text } from "@mantine/core";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 
 import { useGetMovieGenresQuery } from "../../store/movies.api";
-import { IGenre } from "../../interfaces/searchMoviesDataInterfaces";
+
 import { useReplaceGenreId, useResize } from "../../hooks";
+
+import { IGenre } from "../../interfaces/searchMoviesDataInterfaces";
 import { IMAGE_URL } from "../../const";
 
 import Heading from "../Heading";
@@ -24,9 +26,10 @@ interface CustomCardProps {
   image: string;
   title: string;
   rate: number;
-  isRated: boolean;
+  isFavorite: boolean;
   list: number[];
-  handleClick: () => void;
+  handleAddMovie?: () => void;
+  handleRemoveMovie: () => void;
 }
 
 const MoviesCard: FC<CustomCardProps> = ({
@@ -36,12 +39,11 @@ const MoviesCard: FC<CustomCardProps> = ({
   image,
   title,
   rate,
-  isRated,
+  isFavorite,
   list,
-  handleClick,
+  handleAddMovie,
+  handleRemoveMovie,
 }) => {
-  const { pathname } = useLocation();
-
   const { data: genres } = useGetMovieGenresQuery();
 
   const { genresList, replaceGenreIdToGenreString } = useReplaceGenreId();
@@ -53,63 +55,28 @@ const MoviesCard: FC<CustomCardProps> = ({
 
   return (
     <Card radius="md" shadow="sm" className="relative w-full sm:p-2">
-      {pathname === "/rated" ? (
-        <>
-          <CustomUnstyledButton
-            handleClick={handleClick}
-            className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
-          >
-            {isRated ? (
-              <Box className="flex items-center gap-1">
-                <Image
-                  className="sm:h-5 sm:w-5"
-                  src="/addedRate.svg"
-                  width="25"
-                  height="25"
-                  alt="Added rate icon"
-                />
-              </Box>
-            ) : (
-              <Image
-                className="sm:h-5 sm:w-5"
-                src="/emptyRate.svg"
-                width="25"
-                height="25"
-                alt="Empty rate icon"
-              />
-            )}
-          </CustomUnstyledButton>
-        </>
+      {isFavorite ? (
+        <CustomUnstyledButton
+          handleClick={handleRemoveMovie}
+          className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
+        >
+          <Image
+            className="h-7 w-7 sm:h-5 sm:w-5"
+            src="/addedFavorite.svg"
+            alt="Added favorite icon"
+          />
+        </CustomUnstyledButton>
       ) : (
-        <>
-          {isRated ? (
-            <Link
-              to={"/rated"}
-              className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
-            >
-              <Image
-                className="sm:h-5 sm:w-5"
-                src="/addedRate.svg"
-                width="25"
-                height="25"
-                alt="Added rate icon"
-              />
-            </Link>
-          ) : (
-            <CustomUnstyledButton
-              handleClick={handleClick}
-              className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
-            >
-              <Image
-                className="sm:h-5 sm:w-5"
-                src="/emptyRate.svg"
-                width="25"
-                height="25"
-                alt="Empty rate icon"
-              />
-            </CustomUnstyledButton>
-          )}
-        </>
+        <CustomUnstyledButton
+          handleClick={handleAddMovie}
+          className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
+        >
+          <Image
+            className="h-7 w-7 sm:h-5 sm:w-5"
+            src="/addToFavorite.svg"
+            alt="Add to favorite icon"
+          />
+        </CustomUnstyledButton>
       )}
 
       <Link to={link} className="flex max-w-[482px] 2xl:max-w-full">
@@ -118,8 +85,6 @@ const MoviesCard: FC<CustomCardProps> = ({
             <Image
               className="lg:w-full"
               src={`${IMAGE_URL}${image}`}
-              width="100"
-              height="170"
               alt={title}
             />
           ) : isScreenLg ? (

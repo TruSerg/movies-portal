@@ -12,7 +12,6 @@ import BasicPagination from "../../../../components/Pagination";
 import CustomLoader from "../../../../components/Loaders/Loader";
 import ErrorComponent from "../../../../components/ErrorComponent";
 
-
 const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
   isMoviesLoading,
   isMoviesFetching,
@@ -27,9 +26,9 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
   currentPage,
   handlePageChange,
   handleModalClose,
-  handleAddFavoriteMovie,
+  handleAddMovieToFavorite,
+  handleRemoveMovieFromFavorite,
   isAddMovieToFavorite,
-  handleFindMovie,
 }) => {
   return (
     <>
@@ -69,8 +68,11 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
                             date={release_date}
                             popularity={popularity}
                             list={genre_ids}
-                            isRated={isAddMovieToFavorite(id)}
-                            handleClick={() => handleFindMovie(id)}
+                            isFavorite={isAddMovieToFavorite(id)}
+                            handleAddMovie={() => handleAddMovieToFavorite(id)}
+                            handleRemoveMovie={() =>
+                              handleRemoveMovieFromFavorite(id)
+                            }
                           />
                         );
                       },

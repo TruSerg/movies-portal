@@ -5,7 +5,6 @@ import {
   useTrendingMoviesQuery,
 } from "../../../store/movies.api";
 import {
-  findMovie,
   handleMoviesListChange,
 } from "../../../store/searchMoviesSlice";
 
@@ -20,7 +19,11 @@ const TrendingMoviesPageContainer = () => {
 
   const { currentPage, handlePageChange } = usePagination();
   const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
-  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useFavoriteMovies();
+  const {
+    handleAddFavoriteMovie,
+    handleRemoveFavoriteMovie,
+    isAddMovieToFavorite,
+  } = useFavoriteMovies();
 
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
 
@@ -32,20 +35,21 @@ const TrendingMoviesPageContainer = () => {
     error: trendingMoviesError,
   } = useTrendingMoviesQuery({ currentPage });
 
-  useEffect(() => {
-    dispatch(handleMoviesListChange(trendingMoviesList));
-  }, [dispatch, trendingMovies]);
-
   const trendingMoviesList = trendingMovies?.results;
   const totalPages = trendingMovies?.total_pages;
   const movieTitle = movie.title;
-  const movieId = movie.id;
 
-  const handleFindMovie = (id: number) => {
-    handleModalOpen();
-
-    dispatch(findMovie(id));
+  const handleAddMovieToFavorite = (id: number) => {
+    handleAddFavoriteMovie(id);
   };
+
+  const handleRemoveMovieFromFavorite = (id: number) => {
+    handleRemoveFavoriteMovie(id);
+  };
+
+  useEffect(() => {
+    dispatch(handleMoviesListChange(trendingMoviesList));
+  }, [dispatch, trendingMovies]);
 
   return (
     <TrendingPageLayout
@@ -57,14 +61,13 @@ const TrendingMoviesPageContainer = () => {
       isModalOpen={isModalOpen}
       totalPages={totalPages ? totalPages : 0}
       currentPage={currentPage}
-      movieId={movieId}
       movieTitle={movieTitle}
       moviesList={moviesList}
+      handleAddMovieToFavorite={handleAddMovieToFavorite}
+      handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
-      handleFindMovie={handleFindMovie}
       handlePageChange={handlePageChange}
       handleModalClose={handleModalClose}
-      handleAddFavoriteMovie={handleAddFavoriteMovie}
     />
   );
 };
