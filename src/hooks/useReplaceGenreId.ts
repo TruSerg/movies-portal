@@ -1,25 +1,28 @@
-import { useState } from 'react';
+import { useCallback, useState } from "react";
 
-import { IGenre } from '../interfaces/searchMoviesDataInterfaces';
+import { IGenre } from "../interfaces/searchMoviesDataInterfaces";
 
 const useReplaceGenreId = () => {
-	const [genresList, setGenresList] = useState<string[]>([]);
+  const [genresList, setGenresList] = useState<string[]>([]);
 
-	const replaceGenreIdToGenreString = (genresArr: IGenre[], arr: number[]) => {
-		if (genresArr) {
-			const genresObj = Object.fromEntries(
-				genresArr?.map(({ id, name }) => [id, name])
-			);
+  const replaceGenreIdToGenreString = useCallback(
+    (genresArr: IGenre[], arr: number[]) => {
+      if (genresArr) {
+        const genresObj = Object.fromEntries(
+          genresArr?.map(({ id, name }) => [id, name]),
+        );
 
-			const newArr = arr?.map(genreId => {
-				return genresObj[genreId];
-			});
+        const newArr = arr?.map((genreId) => {
+          return genresObj[genreId];
+        });
 
-			setGenresList(newArr.slice(0, 3));
-		}
-	};
+        setGenresList(newArr.slice(0, 3));
+      }
+    },
+    [],
+  );
 
-	return { genresList, replaceGenreIdToGenreString };
+  return { genresList, replaceGenreIdToGenreString };
 };
 
 export default useReplaceGenreId;

@@ -1,135 +1,138 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from "react";
 
 import {
-	useGetMovieGenresQuery,
-	useLazySearchMoviesQuery,
-} from '../../../store/movies.api';
+  useGetMovieGenresQuery,
+  useLazySearchMoviesQuery,
+  useSearchMoviesQuery,
+} from "../../../store/movies.api";
 
 import {
-	findMovie,
-	handleMoviesListChange,
-} from '../../../store/searchMoviesSlice';
+  findMovie,
+  handleMoviesListChange,
+} from "../../../store/searchMoviesSlice";
 
-import { getRequestErrors } from '../../../utils/getRequestErrors';
+import { getRequestErrors } from "../../../utils/getRequestErrors";
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/useStoreHooks';
+import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import {
-	usePagination,
-	useRatedMovies,
-	useSelect,
-	useYearPickerInput,
-} from '../../../hooks';
+  usePagination,
+  useRatedMovies,
+  useSelect,
+  useYearPickerInput,
+} from "../../../hooks";
 
-import HomePageLayout from '../components/HomePageLayout';
+import HomePageLayout from "../components/HomePageLayout";
 
 const HomePageContainer: FC = () => {
-	const dispatch = useAppDispatch();
-	const [isFirstRequest, setIsFirstRequest] = useState(false);
+  const dispatch = useAppDispatch();
+  const [isFirstRequest, setIsFirstRequest] = useState(false);
 
-	const { moviesList } = useAppSelector(state => state.searchMovies);
+  const { moviesList, movie } = useAppSelector((state) => state.searchMovies);
 
-	const { handleAddFavoriteMovie, isAddMovieToFavorite } = useRatedMovies();
-	const {
-		moviesGenreValue,
-		rateFrom,
-		rateTo,
-		sortValue,
-		handleMovieValueChange,
-		handleRateFromChange,
-		handleRateToChange,
-		handleSortValueChange,
-	} = useSelect();
-	const { currentPage, handlePageChange } = usePagination();
-	const { yearPickerValue, handleYearPickerValueChange } = useYearPickerInput();
+  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useRatedMovies();
+  const {
+    moviesGenreValue,
+    rateFrom,
+    rateTo,
+    sortValue,
+    handleMovieValueChange,
+    handleRateFromChange,
+    handleRateToChange,
+    handleSortValueChange,
+  } = useSelect();
+  const { currentPage, handlePageChange } = usePagination();
+  const { yearPickerValue, handleYearPickerValueChange } = useYearPickerInput();
 
-	const {
-		data: genres,
-		isLoading: isGenresLoading,
-		isFetching: isGenresFetching,
-		isError: isGenresError,
-		error: genresError,
-	} = useGetMovieGenresQuery();
+  console.log("moviesGenreValue: ", moviesGenreValue);
 
-	const [
-		fetchSearchMovies,
-		{
-			data: movies,
-			isLoading: isMoviesLoading,
-			isFetching: isMoviesFetching,
-			isError: isMoviesError,
-			error: moviesError,
-		},
-	] = useLazySearchMoviesQuery();
+  const {
+    data: genres,
+    isLoading: isGenresLoading,
+    isFetching: isGenresFetching,
+    isError: isGenresError,
+    error: genresError,
+  } = useGetMovieGenresQuery();
 
-	const handleFormSubmit = (e: globalThis.KeyboardEvent) => {
-		e.preventDefault();
+  const [
+    fetchSearchMovies,
+    {
+      data: movies,
+      isLoading: isMoviesLoading,
+      isFetching: isMoviesFetching,
+      isError: isMoviesError,
+      error: moviesError,
+    },
+  ] = useLazySearchMoviesQuery();
 
-		if (moviesGenreValue) {
-			handlePageChange(1);
-			fetchSearchMovies({
-				currentPage,
-				sortValue,
-				moviesGenreValue,
-				releaseYear: yearPickerValue,
-				from: rateFrom,
-				to: rateTo,
-			});
-			setIsFirstRequest(true);
-		}
-	};
+  const handleFormSubmit = (e: globalThis.KeyboardEvent) => {
+    e.preventDefault();
 
-	useEffect(() => {
-		if (isFirstRequest) {
-			fetchSearchMovies({
-				currentPage,
-				sortValue,
-				moviesGenreValue,
-				releaseYear: yearPickerValue,
-				from: rateFrom,
-				to: rateTo,
-			});
-		}
-	}, [isFirstRequest, currentPage, sortValue]);
+    if (moviesGenreValue) {
+      handlePageChange(1);
+      fetchSearchMovies({
+        currentPage,
+        sortValue,
+        moviesGenreValue,
+        releaseYear: yearPickerValue,
+        from: rateFrom,
+        to: rateTo,
+      });
+    }
+  };
 
-	const totalPages = movies?.total_pages;
-	const genresErrorChange = getRequestErrors(genresError);
+  useEffect(() => {
+    fetchSearchMovies({
+      currentPage,
+      sortValue,
+      moviesGenreValue,
+      releaseYear: yearPickerValue,
+      from: rateFrom,
+      to: rateTo,
+    });
 
-	const handleFindMovie = (id: number) => {
-		dispatch(findMovie(id));
-	};
+    setIsFirstRequest(true);
+  }, [currentPage, sortValue]);
 
-	useEffect(() => {
-		dispatch(handleMoviesListChange(movies?.results));
-	}, [dispatch, movies]);
+  const searchMovies = movies?.results;
+  const totalPages = movies?.total_pages;
+  const genresErrorChange = getRequestErrors(genresError);
 
-	return (
-		<HomePageLayout
-			isGenresError={isGenresError}
-			isGenresLoading={isGenresLoading}
-			isGenresFetching={isGenresFetching}
-			isFirstRequest={isFirstRequest}
-			isMoviesLoading={isMoviesLoading}
-			isMoviesFetching={isMoviesFetching}
-			isMoviesError={isMoviesError}
-			moviesError={moviesError}
-			totalPages={totalPages ? totalPages : 0}
-			genresErrorChange={genresErrorChange ? genresErrorChange : ''}
-			yearPickerValue={yearPickerValue ? yearPickerValue : null}
-			currentPage={currentPage}
-			moviesList={moviesList}
-			genres={genres ? genres : []}
-			handleFormSubmit={handleFormSubmit}
-			handleMovieValueChange={handleMovieValueChange}
-			handleRateFromChange={handleRateFromChange}
-			handleRateToChange={handleRateToChange}
-			handleSortValueChange={handleSortValueChange}
-			handleYearPickerValueChange={handleYearPickerValueChange}
-			handleAddFavoriteMovie={handleAddFavoriteMovie}
-			isAddMovieToFavorite={isAddMovieToFavorite}
-			handleFindMovie={handleFindMovie}
-			handlePageChange={handlePageChange}
-		/>
-	);
+  useEffect(() => {
+    dispatch(handleMoviesListChange(searchMovies));
+  }, [dispatch, searchMovies]);
+
+  const handleFindMovie = (id: number) => {
+    dispatch(findMovie(id));
+  };
+
+  return (
+    <HomePageLayout
+      isGenresError={isGenresError}
+      isGenresLoading={isGenresLoading}
+      isGenresFetching={isGenresFetching}
+      isFirstRequest={isFirstRequest}
+      isMoviesLoading={isMoviesLoading}
+      isMoviesFetching={isMoviesFetching}
+      isMoviesError={isMoviesError}
+      moviesError={moviesError}
+      totalPages={totalPages ? totalPages : 0}
+      genresErrorChange={genresErrorChange ? genresErrorChange : ""}
+      yearPickerValue={yearPickerValue ? yearPickerValue : null}
+      currentPage={currentPage}
+      moviesList={moviesList ? moviesList : []}
+      genres={genres ? genres : []}
+      handleFormSubmit={handleFormSubmit}
+      handleMovieValueChange={handleMovieValueChange}
+      handleRateFromChange={handleRateFromChange}
+      handleRateToChange={handleRateToChange}
+      handleSortValueChange={handleSortValueChange}
+      handleYearPickerValueChange={handleYearPickerValueChange}
+      handleAddFavoriteMovie={handleAddFavoriteMovie}
+      isAddMovieToFavorite={isAddMovieToFavorite}
+      handleFindMovie={handleFindMovie}
+      handlePageChange={handlePageChange}
+    />
+  );
 };
 
 export default HomePageContainer;

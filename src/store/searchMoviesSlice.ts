@@ -8,7 +8,7 @@ interface SearchMoviesState {
   ratedMovies: IMovie[];
   genresList: IGenre[];
   moviesFilterValue: string;
-  titleMovies: string;
+  moviesFilterValueTitle: string;
 }
 
 const initialState: SearchMoviesState = {
@@ -17,7 +17,7 @@ const initialState: SearchMoviesState = {
   ratedMovies: [],
   genresList: [],
   moviesFilterValue: "",
-  titleMovies: "",
+  moviesFilterValueTitle: "",
 };
 
 const searchMoviesSlice = createSlice({
@@ -28,7 +28,7 @@ const searchMoviesSlice = createSlice({
       state.moviesFilterValue = payload;
     },
     changeTitleMovies(state, { payload }) {
-      state.titleMovies = payload;
+      state.moviesFilterValueTitle = payload;
     },
     handleGenresListChange(state, { payload }) {
       state.genresList.push(payload);

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Select } from "@mantine/core";
-import { useResize } from "../../../hooks";
+import { useResize } from "../../hooks";
 
 interface SelectProps {
   clearable?: boolean;

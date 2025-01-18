@@ -56,13 +56,6 @@ export const moviesApi = createApi({
 			query: ({ moviesFilterValue, currentPage }) =>
 				`movie/${moviesFilterValue}?include_video=true&language=ru&page=${currentPage}`,
 		}),
-		addMovieRating: builder.query({
-			query: ({ id, value }) => ({
-				url: `movie/${id}/rating`,
-				method: 'POST',
-				body: { value },
-			}),
-		}),
 		searchMoviesByTitle: builder.query<MoviesServerResponse, string>({
 			query: searchValue =>
 				`search/movie?include_video=true&language=ru&query=${searchValue}`,
@@ -72,9 +65,9 @@ export const moviesApi = createApi({
 
 export const {
   useGetMovieGenresQuery,
+	useSearchMoviesQuery,
   useLazySearchMoviesQuery,
   useTrendingMoviesQuery,
   useLazyGetMoviesByFilterQuery,
-  useLazyAddMovieRatingQuery,
   useLazySearchMoviesByTitleQuery,
 } = moviesApi;

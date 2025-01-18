@@ -42,7 +42,7 @@ const SideBar = () => {
 				</span>
 				<span className='h-6 w-16 rounded-full bg-purple-500 sm:h-5 sm:w-14'></span>
 			</Box>
-			<Box className='flex flex-col gap-2 xl:flex-row xl:items-center'>
+			<Box className='flex flex-col gap-2 xl:flex-row xl:items-center mb-8'>
 				<Link
 					to='/'
 					className={

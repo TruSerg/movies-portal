@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mantine-Select-input:focus {
+  @apply border-purple-500;
+}
+
+.mantine-YearPickerInput-input:focus {
+  @apply border-purple-500;
+}
+
+.mantine-PickerControl-pickerControl:focus {
+  @apply bg-purple-500;
+}
+.mantine-Input-input:focus {
+  @apply border-purple-500;
+}

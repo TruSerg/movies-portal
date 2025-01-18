@@ -10,7 +10,7 @@ import {
 const useSelect = () => {
 	const dispatch = useAppDispatch();
 
-	const [moviesGenreValue, setMoviesGenreValue] = useState<string>('');
+	const [moviesGenreValue, setMoviesGenreValue] = useState<string>('35');
 	const [rateFrom, setRateFrom] = useState<string>('');
 	const [rateTo, setRateTo] = useState<string>('');
 	const [sortValue, setSortValue] = useState<string>('');
