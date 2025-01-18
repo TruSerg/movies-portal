@@ -18,7 +18,7 @@ const ErrorComponent: FC<ErrorComponentProps> = ({ error }) => {
     <Box className="flex min-h-[80vh] flex-col items-center justify-center">
       <Image src={ErrorImage} width="656" height="51" alt="Error" />
       <Box className="text-7xl md:text-6xl sm:text-5xl">
-        <span>ERROR</span>
+        <span className="font-vt323">ERROR</span>
       </Box>
 
       <Image src={ErrorImage} width="656" height="51" alt="Error" />
@@ -30,7 +30,7 @@ const ErrorComponent: FC<ErrorComponentProps> = ({ error }) => {
           text={`${error!}`}
         />
 
-        {pathname !== "/" ? <CustomLink href="/" text="Искать фильмы" /> : null}
+        {pathname !== "/" ? <CustomLink href="/" text="На главную" /> : null}
       </Box>
     </Box>
   );

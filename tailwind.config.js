@@ -12,7 +12,12 @@ module.exports = {
       md: { max: "640px" },
       sm: { max: "480px" },
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+        vt323: ["VT323", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

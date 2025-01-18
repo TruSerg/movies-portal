@@ -1,22 +1,13 @@
 import { FC } from "react";
-import { SerializedError } from "@reduxjs/toolkit";
-import { DateValue } from "@mantine/dates";
-import { Box, Button, rem } from "@mantine/core";
+import { Box, rem } from "@mantine/core";
 import { IconChevronDown, IconSearch } from "@tabler/icons-react";
 
-import {
-  IGenre,
-  IMovie,
-} from "../../../../interfaces/searchMoviesDataInterfaces";
-import {
-  ISearchMoviesDataErrorObject,
-  ISearchMoviesErrorObject,
-} from "../../../../interfaces/searchMoviesErrorsInterfaces";
+import { HomePageLayoutProps } from "../../../../interfaces/layoutInterfaces";
 
 import { getRequestErrors } from "../../../../utils/getRequestErrors";
 
 import {
-  movieFromToRateList,
+  movieFromRateList,
   movieSortList,
   movieToRateList,
 } from "../../../../const";
@@ -32,37 +23,7 @@ import StartSearchingComponent from "../../../../components/StartSearchingCompon
 import MoviesCard from "../../../../components/MoviesCard";
 import BasicPagination from "../../../../components/Pagination";
 import CustomButton from "../../../../components/Buttons/CustomButton";
-
-interface HomePageLayoutProps {
-  isGenresError: boolean;
-  isGenresLoading: boolean;
-  isGenresFetching: boolean;
-  isFirstRequest: boolean;
-  isMoviesLoading: boolean;
-  isMoviesFetching: boolean;
-  isMoviesError: boolean;
-  moviesError:
-    | ISearchMoviesErrorObject
-    | ISearchMoviesDataErrorObject
-    | SerializedError
-    | undefined;
-  totalPages: number;
-  genresErrorChange: string;
-  yearPickerValue: DateValue | number;
-  currentPage: number;
-  moviesList: IMovie[];
-  genres: IGenre[];
-  handleFormSubmit: (e: globalThis.KeyboardEvent) => void;
-  handleMovieValueChange: (value: string, genres: IGenre[]) => void;
-  handleRateFromChange: (value: string) => void;
-  handleRateToChange: (value: string) => void;
-  handleSortValueChange: (value: string) => void;
-  handleYearPickerValueChange: (value: DateValue) => void;
-  handleAddFavoriteMovie: (id: number) => void;
-  isAddMovieToFavorite: (id: number) => boolean;
-  handleFindMovie: (id: number) => void;
-  handlePageChange: (page: number) => void;
-}
+import CustomModal from "../../../../components/Modal";
 
 const HomePageLayout: FC<HomePageLayoutProps> = ({
   isGenresError,
@@ -72,11 +33,15 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
   isMoviesLoading,
   isMoviesFetching,
   isMoviesError,
+  isModalOpen,
   moviesError,
+  moviesGenreValue,
   totalPages,
   genresErrorChange,
   yearPickerValue,
   currentPage,
+  movieTitle,
+  movieId,
   moviesList,
   genres,
   handleFormSubmit,
@@ -85,6 +50,7 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
   handleRateToChange,
   handleSortValueChange,
   handleYearPickerValueChange,
+  handleModalClose,
   handleAddFavoriteMovie,
   isAddMovieToFavorite,
   handleFindMovie,
@@ -144,7 +110,7 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
           <Box className="grid grid-cols-2 items-end gap-2 lg:grid-cols-4 lg:gap-4 md:grid-cols-3 md:gap-2 sm:grid-cols-2">
             <CustomSelect
               clearable={true}
-              data={movieFromToRateList}
+              data={movieFromRateList}
               label="Рейтинг"
               placeholder="От"
               handleChange={(value) => handleRateFromChange(value ?? "")}
@@ -165,9 +131,13 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
             type="submit"
             color="#c084fc"
             variant="outline"
+            radius="md"
+            disabled={moviesGenreValue ? false : true}
             className="flex w-full max-w-[100px] items-center justify-end justify-center transition delay-150 ease-in-out lg:h-8 sm:h-7 sm:max-w-[70px] sm:text-sm"
           >
-            <IconSearch className="h-5 w-5 lg:h-4 lg:w-4 sm:h-3 sm:w-3" />
+            {moviesGenreValue ? (
+              <IconSearch className="h-5 w-5 lg:h-4 lg:w-4 sm:h-3 sm:w-3" />
+            ) : null}
           </CustomButton>
         </Box>
 
@@ -195,7 +165,7 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
                 <ErrorComponent error={getRequestErrors(moviesError) ?? ""} />
               ) : (
                 <>
-                  {!moviesList ? (
+                  {!moviesList?.length ? (
                     <StartSearchingComponent />
                   ) : (
                     <ul className="grid grid-cols-2 gap-4 lg:grid-cols-3 md:grid-cols-2 sm:gap-2">
@@ -241,6 +211,26 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
           />
         ) : null}
       </main>
+
+      <CustomModal
+        opened={isModalOpen}
+        handleClose={handleModalClose}
+        title="Оценка фильма"
+      >
+        <Box className="border-gray border-t pt-3">
+          <Heading
+            text={`Чтобы добавить ${movieTitle} в избранное, необходимо авторизоваться!`}
+            className="mb-4 text-[18px] font-bold lg:text-[16px] sm:mb-3 sm:text-[14px]"
+          />
+        </Box>
+
+        {/* <CustomUnstyledButton
+          handleClick={() => handleAddMovieRating(movieId, rating)}
+          className="rounded-lg pb-[10px] pl-[20px] pr-[20px] pt-[10px] text-sm text-purple-500 transition-all delay-150 ease-in-out hover:bg-purple-500 hover:text-white"
+        >
+          Сохранить
+        </CustomUnstyledButton> */}
+      </CustomModal>
     </>
   );
 };

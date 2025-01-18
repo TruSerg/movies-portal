@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from "react";
 import {
   useGetMovieGenresQuery,
   useLazySearchMoviesQuery,
-  useSearchMoviesQuery,
 } from "../../../store/movies.api";
 
 import {
@@ -15,8 +14,9 @@ import { getRequestErrors } from "../../../utils/getRequestErrors";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import {
+  useFavoriteMovies,
+  useModal,
   usePagination,
-  useRatedMovies,
   useSelect,
   useYearPickerInput,
 } from "../../../hooks";
@@ -29,7 +29,7 @@ const HomePageContainer: FC = () => {
 
   const { moviesList, movie } = useAppSelector((state) => state.searchMovies);
 
-  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useRatedMovies();
+  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useFavoriteMovies();
   const {
     moviesGenreValue,
     rateFrom,
@@ -41,6 +41,7 @@ const HomePageContainer: FC = () => {
     handleSortValueChange,
   } = useSelect();
   const { currentPage, handlePageChange } = usePagination();
+  const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
   const { yearPickerValue, handleYearPickerValueChange } = useYearPickerInput();
 
   console.log("moviesGenreValue: ", moviesGenreValue);
@@ -77,24 +78,28 @@ const HomePageContainer: FC = () => {
         from: rateFrom,
         to: rateTo,
       });
+
+      setIsFirstRequest(true);
     }
   };
 
   useEffect(() => {
-    fetchSearchMovies({
-      currentPage,
-      sortValue,
-      moviesGenreValue,
-      releaseYear: yearPickerValue,
-      from: rateFrom,
-      to: rateTo,
-    });
-
-    setIsFirstRequest(true);
-  }, [currentPage, sortValue]);
+    if (isFirstRequest) {
+      fetchSearchMovies({
+        currentPage,
+        sortValue,
+        moviesGenreValue,
+        releaseYear: yearPickerValue,
+        from: rateFrom,
+        to: rateTo,
+      });
+    }
+  }, [isFirstRequest, currentPage, sortValue]);
 
   const searchMovies = movies?.results;
   const totalPages = movies?.total_pages;
+  const movieTitle = movie.title;
+  const movieId = movie.id;
   const genresErrorChange = getRequestErrors(genresError);
 
   useEffect(() => {
@@ -114,11 +119,15 @@ const HomePageContainer: FC = () => {
       isMoviesLoading={isMoviesLoading}
       isMoviesFetching={isMoviesFetching}
       isMoviesError={isMoviesError}
+      isModalOpen={isModalOpen}
       moviesError={moviesError}
+      moviesGenreValue={moviesGenreValue}
       totalPages={totalPages ? totalPages : 0}
       genresErrorChange={genresErrorChange ? genresErrorChange : ""}
       yearPickerValue={yearPickerValue ? yearPickerValue : null}
       currentPage={currentPage}
+      movieTitle={movieTitle}
+      movieId={movieId}
       moviesList={moviesList ? moviesList : []}
       genres={genres ? genres : []}
       handleFormSubmit={handleFormSubmit}
@@ -127,6 +136,7 @@ const HomePageContainer: FC = () => {
       handleRateToChange={handleRateToChange}
       handleSortValueChange={handleSortValueChange}
       handleYearPickerValueChange={handleYearPickerValueChange}
+      handleModalClose={handleModalClose}
       handleAddFavoriteMovie={handleAddFavoriteMovie}
       isAddMovieToFavorite={isAddMovieToFavorite}
       handleFindMovie={handleFindMovie}

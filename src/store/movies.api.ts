@@ -65,7 +65,6 @@ export const moviesApi = createApi({
 
 export const {
   useGetMovieGenresQuery,
-	useSearchMoviesQuery,
   useLazySearchMoviesQuery,
   useTrendingMoviesQuery,
   useLazyGetMoviesByFilterQuery,

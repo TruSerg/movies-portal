@@ -5,7 +5,7 @@ export { default as usePagination } from "./usePagination";
 export { default as useYearPickerInput } from "./useYearPickerInput";
 export { default as useResize } from "./useResize";
 export { default as useModal } from "./useModal";
-export { default as useRatedMovies } from "./useRatedMovies";
+export { default as useFavoriteMovies } from "./useRatedMovies";
 export { default as useLocalStorage } from "./useLocalStorage";
 export { default as useVisible } from "./useVisible";
 export { default as useInput } from "./useInput";

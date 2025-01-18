@@ -1,50 +1,53 @@
 import { FC } from "react";
 import { Box } from "@mantine/core";
 
-import { MoviesPageLayoutProps } from "../../../../interfaces/layoutInterfaces";
+import { TrendingPageLayoutProps } from "../../../../interfaces/layoutInterfaces";
 
 import { getRequestErrors } from "../../../../utils/getRequestErrors";
 
-import Heading from "../../../../components/Heading";
-import CustomModal from "../../../../components/Modal";
-import MoviesCard from "../../../../components/MoviesCard";
-import BasicPagination from "../../../../components/Pagination";
 import CustomLoader from "../../../../components/Loaders/Loader";
 import ErrorComponent from "../../../../components/ErrorComponent";
+import Heading from "../../../../components/Heading";
+import MoviesCard from "../../../../components/MoviesCard";
+import BasicPagination from "../../../../components/Pagination";
+import CustomModal from "../../../../components/Modal";
 
-
-const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
-  isMoviesLoading,
-  isMoviesFetching,
-  isMoviesError,
+const TrendingPageLayout: FC<TrendingPageLayoutProps> = ({
+  isTrendingMoviesLoading,
+  isTrendingMoviesFetching,
   isGenresLoading,
+  isTrendingMoviesError,
+  trendingMoviesError,
   isModalOpen,
-  moviesError,
-  moviesFilterValueTitle,
-  movieTitle,
-  moviesList,
   totalPages,
   currentPage,
+  movieId,
+  movieTitle,
+  moviesList,
+  isAddMovieToFavorite,
+  handleFindMovie,
   handlePageChange,
   handleModalClose,
   handleAddFavoriteMovie,
-  isAddMovieToFavorite,
-  handleFindMovie,
 }) => {
   return (
     <>
       <main className="m-[0_auto] w-full max-w-[1010px] pb-10 pl-[15px] pr-[15px] pt-10 xl:pb-5 xl:pt-5 lg:text-[28px] sm:text-[24px]">
         <Box className="relative mb-6 min-h-[80vh]">
-          {isMoviesLoading || isMoviesFetching || isGenresLoading ? (
+          {isTrendingMoviesLoading ||
+          isTrendingMoviesFetching ||
+          isGenresLoading ? (
             <CustomLoader className="absolute left-1/2 top-1/2 mr-[-50%] translate-x-[-50%] translate-y-[-50%]" />
           ) : (
             <>
-              {isMoviesError ? (
-                <ErrorComponent error={getRequestErrors(moviesError) ?? ""} />
+              {isTrendingMoviesError ? (
+                <ErrorComponent
+                  error={getRequestErrors(trendingMoviesError) ?? ""}
+                />
               ) : (
                 <>
                   <Heading
-                    text={moviesFilterValueTitle}
+                    text="На пике популярности"
                     className="mb-10 text-[32px] font-bold xl:mb-5 lg:text-[24px] sm:mb-3 sm:text-[18px]"
                   />
 
@@ -98,13 +101,13 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
       >
         <Box className="border-gray border-t pt-3">
           <Heading
-            text={`Чтобы добавить ${movieTitle} в избранное, нужно авторизоваться!`}
+            text={`Чтобы добавить ${movieTitle} в избранное, необходимо авторизоваться!`}
             className="mb-4 text-[18px] font-bold lg:text-[16px] sm:mb-3 sm:text-[14px]"
           />
         </Box>
 
         {/* <CustomUnstyledButton
-          handleClick={() => handleAddMovieRating(movieId, rating)}
+          handleClick={() => handleAddFavoriteMovie(movieId, rating)}
           className="rounded-lg pb-[10px] pl-[20px] pr-[20px] pt-[10px] text-sm text-purple-500 transition-all delay-150 ease-in-out hover:bg-purple-500 hover:text-white"
         >
           Сохранить
@@ -114,4 +117,4 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
   );
 };
 
-export default MoviesPageLayout;
+export default TrendingPageLayout;

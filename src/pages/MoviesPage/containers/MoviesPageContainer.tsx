@@ -12,9 +12,9 @@ import {
 
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import {
+  useFavoriteMovies,
   useModal,
   usePagination,
-  useRatedMovies,
   useVisible,
 } from "../../../hooks";
 
@@ -26,7 +26,7 @@ const MoviesPageContainer = () => {
     useAppSelector((state) => state.searchMovies);
 
   const { currentPage, handlePageChange } = usePagination();
-  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useRatedMovies();
+  const { handleAddFavoriteMovie, isAddMovieToFavorite } = useFavoriteMovies();
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
   const { isVisible, handleVisible, handleHidden } = useVisible();
 

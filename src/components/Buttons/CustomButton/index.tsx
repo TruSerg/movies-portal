@@ -1,11 +1,13 @@
 import { FC, ReactNode } from "react";
-import { Button } from "@mantine/core";
+import { Button, MantineRadius } from "@mantine/core";
 
 interface CustomButtonProps {
   form?: string;
   type?: string;
   color?: string;
   variant?: string;
+  radius?: MantineRadius;
+  disabled?: boolean;
   className?: string;
   children: ReactNode;
   handleClick?: () => void;
@@ -16,6 +18,8 @@ const CustomButton: FC<CustomButtonProps> = ({
   type,
   color,
   variant,
+  radius,
+  disabled,
   className,
   children,
   handleClick,
@@ -26,6 +30,8 @@ const CustomButton: FC<CustomButtonProps> = ({
       type={type}
       color={color}
       variant={variant}
+      radius={radius}
+      disabled={disabled}
       className={className}
       onClick={handleClick}
     >

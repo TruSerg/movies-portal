@@ -57,7 +57,7 @@ const MoviesCard: FC<CustomCardProps> = ({
         <>
           <CustomUnstyledButton
             handleClick={handleClick}
-            className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 sm:right-2 sm:top-2 lg:right-4 lg:top-4"
+            className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
           >
             {isRated ? (
               <Box className="flex items-center gap-1">
@@ -85,7 +85,7 @@ const MoviesCard: FC<CustomCardProps> = ({
           {isRated ? (
             <Link
               to={"/rated"}
-              className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 sm:right-2 sm:top-2 lg:right-4 lg:top-4"
+              className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
             >
               <Image
                 className="sm:h-5 sm:w-5"
@@ -98,7 +98,7 @@ const MoviesCard: FC<CustomCardProps> = ({
           ) : (
             <CustomUnstyledButton
               handleClick={handleClick}
-              className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 sm:right-2 sm:top-2 lg:right-4 lg:top-4"
+              className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
             >
               <Image
                 className="sm:h-5 sm:w-5"
@@ -133,7 +133,7 @@ const MoviesCard: FC<CustomCardProps> = ({
               <Heading
                 tag="h2"
                 text={title}
-                className="mb-2 text-xl font-semibold leading-tight text-purple-500 sm:mb-1 sm:text-sm sm:leading-tight lg:text-base lg:leading-tight xl:text-lg xl:leading-tight"
+                className="mb-2 text-xl font-semibold leading-tight text-purple-500 xl:text-lg xl:leading-tight lg:text-base lg:leading-tight sm:mb-1 sm:text-sm sm:leading-tight"
               />
 
               <Box className="h-10 w-10"></Box>
@@ -157,7 +157,7 @@ const MoviesCard: FC<CustomCardProps> = ({
                 <Box className="mt-auto flex flex-wrap gap-x-1 lg:text-sm">
                   <Text
                     c="dimmed"
-                    className="text-md leading-tight sm:text-xs lg:text-sm"
+                    className="text-md leading-tight lg:text-sm sm:text-xs"
                   >
                     Жанр:
                   </Text>
@@ -165,7 +165,7 @@ const MoviesCard: FC<CustomCardProps> = ({
                   {genresList?.map((genre: string) => (
                     <Text
                       key={genre}
-                      className="text-md leading-tight first-letter:uppercase sm:text-xs lg:text-sm [&:not(:last-child)]:after:content-[',']"
+                      className="text-md leading-tight first-letter:uppercase lg:text-sm sm:text-xs [&:not(:last-child)]:after:content-[',']"
                     >
                       {genre}
                     </Text>

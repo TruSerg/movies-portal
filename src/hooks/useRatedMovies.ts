@@ -3,36 +3,38 @@ import { IMovie } from '../interfaces/searchMoviesDataInterfaces';
 import { useAppSelector } from './useStoreHooks';
 import useLocalStorage from './useLocalStorage';
 
-const useRatedMovies = () => {
-	const [ratedMovies, setRatedMovies] = useLocalStorage(
-		'ratedMovies',
-		[] as IMovie[]
-	);
+const useFavoriteMovies = () => {
+	const [favoriteMovies, setFavoriteMovies] = useLocalStorage(
+    "favoriteMovies",
+    [] as IMovie[],
+  );
 
 	const { moviesList } = useAppSelector(state => state.searchMovies);
 
 	const handleAddFavoriteMovie = (id: number) => {
 		moviesList.filter(movie => {
 			if (movie.id === id) {
-				setRatedMovies([...ratedMovies, movie]);
+				setFavoriteMovies([...favoriteMovies, movie]);
 			}
 		});
 	};
 
 	const handleRemoveFavoriteMovie = (id: number) => {
-		setRatedMovies(ratedMovies.filter((movie: IMovie) => movie.id !== id));
+		setFavoriteMovies(
+      favoriteMovies.filter((movie: IMovie) => movie.id !== id),
+    );
 	};
 
 	const isAddMovieToFavorite = (id: number) => {
-		return ratedMovies?.findIndex((movie: IMovie) => movie.id === id) !== -1;
+		return favoriteMovies?.findIndex((movie: IMovie) => movie.id === id) !== -1;
 	};
 
 	return {
-		ratedMovies,
-		handleAddFavoriteMovie,
-		handleRemoveFavoriteMovie,
-		isAddMovieToFavorite,
-	};
+    favoriteMovies,
+    handleAddFavoriteMovie,
+    handleRemoveFavoriteMovie,
+    isAddMovieToFavorite,
+  };
 };
 
-export default useRatedMovies;
+export default useFavoriteMovies;

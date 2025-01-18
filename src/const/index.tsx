@@ -28,7 +28,7 @@ export const movieSortList = [
   "Название (Я-А)",
 ];
 
-export const movieFromToRateList = [
+export const movieFromRateList = [
   "1",
   "2",
   "3",

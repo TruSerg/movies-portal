@@ -11,7 +11,7 @@ interface MainLayoutProps {
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   return (
     <Container>
-      <Box className="flex bg-gray-100 xl:flex-col">
+      <Box className="flex bg-gray-100 xl:flex-col font-inter">
         <SideBar />
         {children}
       </Box>
