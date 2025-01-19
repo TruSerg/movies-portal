@@ -5,7 +5,12 @@ import {
   ISearchMoviesDataErrorObject,
   ISearchMoviesErrorObject,
 } from "./searchMoviesErrorsInterfaces";
-import { IGenre, IMovie } from "./searchMoviesDataInterfaces";
+import {
+  IGenre,
+  IMovie,
+  IMovieDetails,
+  IProductionCompany,
+} from "./searchMoviesDataInterfaces";
 
 export interface HomePageLayoutProps {
   isGenresError: boolean;
@@ -40,6 +45,7 @@ export interface HomePageLayoutProps {
   handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
   handlePageChange: (page: number) => void;
+  handleGetMovieDetails: (id: number) => void;
 }
 
 export interface MoviesPageLayoutProps {
@@ -63,6 +69,7 @@ export interface MoviesPageLayoutProps {
   handleAddMovieToFavorite: (id: number) => void;
   handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
+  handleGetMovieDetails: (id: number) => void;
 }
 
 export interface TrendingPageLayoutProps {
@@ -85,6 +92,7 @@ export interface TrendingPageLayoutProps {
   handleModalClose: () => void;
   handleAddMovieToFavorite: (id: number) => void;
   handleRemoveMovieFromFavorite: (id: number) => void;
+  handleGetMovieDetails: (id: number) => void;
 }
 
 export interface FavoriteMoviesPageLayoutProps {
@@ -93,8 +101,37 @@ export interface FavoriteMoviesPageLayoutProps {
   totalPages: number;
   currentPage: number;
   favoriteMovies: IMovie[];
-  list: IMovie[];
+  slicedMoviesList: IMovie[];
   handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
   handlePageChange: (page: number) => void;
+  handleGetMovieDetails: (id: number) => void;
+}
+
+export interface MovieDetailsPageLayoutProps {
+  isMovieLoading: boolean;
+  isMovieFetching: boolean;
+  isMovieError: boolean;
+  isFavorite: boolean;
+  movieError:
+    | ISearchMoviesErrorObject
+    | ISearchMoviesDataErrorObject
+    | SerializedError
+    | undefined;
+  movie: IMovieDetails;
+  image: string;
+  title: string;
+  date: string;
+  rate: number;
+  popularity: number;
+  duration: number;
+  budget: number;
+  grossWorldwide: number;
+  genresList: IGenre[];
+  isShowDetailsBlock: string | IProductionCompany[];
+  movieTrailerId: string;
+  movieDescription: string;
+  movieProduction: IProductionCompany[];
+  handleRemoveMovie: (id: number) => void;
+  handleAddMovie: (id: number) => void;
 }

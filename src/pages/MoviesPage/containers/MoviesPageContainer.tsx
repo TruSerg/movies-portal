@@ -1,33 +1,29 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 import {
   useGetMovieGenresQuery,
   useLazyGetMoviesByFilterQuery,
 } from "../../../store/movies.api";
+import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
 
-import {
-  handleMoviesListChange,
-} from "../../../store/searchMoviesSlice";
-
-import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import { useFavoriteMovies, useModal, usePagination } from "../../../hooks";
+import { useAppSelector } from "../../../hooks/useStoreHooks";
 
 import MoviesPageLayout from "../components/MoviesPageLayout";
 
 const MoviesPageContainer = () => {
-  const dispatch = useAppDispatch();
-  const { moviesList, moviesFilterValue, movie, moviesFilterValueTitle } =
-    useAppSelector((state) => state.searchMovies);
+  const { moviesFilterValue, moviesFilterValueTitle } = useAppSelector(
+    (state) => state.searchMovies,
+  );
+  const { movie, handleGetMovieDetails } = useContext(MovieDetailsContext);
 
   const { currentPage, handlePageChange } = usePagination();
-  const {
-    handleAddFavoriteMovie,
-    handleRemoveFavoriteMovie,
-    isAddMovieToFavorite,
-  } = useFavoriteMovies();
+
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
 
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
+
+  console.log(movie?.id);
 
   const [
     fetchMovies,
@@ -40,20 +36,15 @@ const MoviesPageContainer = () => {
     },
   ] = useLazyGetMoviesByFilterQuery();
 
+  const moviesList = movies?.results;
   const totalPages = movies?.total_pages;
-  const movieTitle = movie.title;
+  const movieTitle = movie?.title;
 
-  const handleAddMovieToFavorite = (id: number) => {
-    handleAddFavoriteMovie(id);
-  };
-
-  const handleRemoveMovieFromFavorite = (id: number) => {
-    handleRemoveFavoriteMovie(id);
-  };
-
-  useEffect(() => {
-    dispatch(handleMoviesListChange(movies?.results));
-  }, [dispatch, movies]);
+  const {
+    handleAddMovieToFavorite,
+    handleRemoveMovieFromFavorite,
+    isAddMovieToFavorite,
+  } = useFavoriteMovies(moviesList ? moviesList : []);
 
   useEffect(() => {
     fetchMovies({ moviesFilterValue, currentPage });
@@ -68,8 +59,8 @@ const MoviesPageContainer = () => {
       isModalOpen={isModalOpen}
       moviesError={moviesError}
       moviesFilterValueTitle={moviesFilterValueTitle}
-      movieTitle={movieTitle}
-      moviesList={moviesList}
+      movieTitle={movieTitle ? movieTitle : ""}
+      moviesList={moviesList ? moviesList : []}
       totalPages={totalPages ? totalPages : 0}
       currentPage={currentPage}
       handlePageChange={handlePageChange}
@@ -77,6 +68,7 @@ const MoviesPageContainer = () => {
       handleAddMovieToFavorite={handleAddMovieToFavorite}
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
+      handleGetMovieDetails={handleGetMovieDetails}
     />
   );
 };

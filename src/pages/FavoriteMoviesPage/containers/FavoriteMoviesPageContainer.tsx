@@ -1,26 +1,35 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+
+import { useGetMovieGenresQuery } from "../../../store/movies.api";
+import { handleMoviesListChange } from "../../../store/searchMoviesSlice";
+import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
+
 import { useFavoriteMovies, usePagination } from "../../../hooks";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
-import { useGetMovieGenresQuery } from "../../../store/movies.api";
-import {
-  handleMoviesListChange,
-} from "../../../store/searchMoviesSlice";
+
 import FavoriteMoviesPageLayout from "../components/FavoriteMoviesPageLayout";
 
 const FavoriteMoviesPageContainer = () => {
   const dispatch = useAppDispatch();
-  const { moviesList, movie } = useAppSelector((state) => state.searchMovies);
 
-  const { favoriteMovies, handleRemoveFavoriteMovie, isAddMovieToFavorite } =
-    useFavoriteMovies();
-  const { list, isPageLoading, currentPage, totalPages, handlePageChange } =
-    usePagination(moviesList);
+  const { moviesList } = useAppSelector((state) => state.searchMovies);
+  const { handleGetMovieDetails } = useContext(MovieDetailsContext);
+
+  const {
+    favoriteMovies,
+    handleRemoveMovieFromFavorite,
+    isAddMovieToFavorite,
+  } = useFavoriteMovies(moviesList);
+
+  const {
+    slicedMoviesList,
+    isPageLoading,
+    currentPage,
+    totalPages,
+    handlePageChange,
+  } = usePagination(moviesList);
 
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
-
-  const handleRemoveMovieFromFavorite = (id: number) => {
-    handleRemoveFavoriteMovie(id);
-  };
 
   useEffect(() => {
     dispatch(handleMoviesListChange(favoriteMovies));
@@ -33,10 +42,11 @@ const FavoriteMoviesPageContainer = () => {
       totalPages={totalPages}
       currentPage={currentPage}
       favoriteMovies={favoriteMovies}
-      list={list}
+      slicedMoviesList={slicedMoviesList}
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
       handlePageChange={handlePageChange}
+      handleGetMovieDetails={handleGetMovieDetails}
     />
   );
 };

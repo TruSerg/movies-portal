@@ -2,9 +2,10 @@ import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "@mantine/core";
 import { Box, Card, Text } from "@mantine/core";
-import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 
-import { useGetMovieGenresQuery } from "../../store/movies.api";
+import {
+  useGetMovieGenresQuery,
+} from "../../store/movies.api";
 
 import { useReplaceGenreId, useResize } from "../../hooks";
 
@@ -19,6 +20,7 @@ import NoImageBig from "../NoImage/NoImageBig";
 import CustomUnstyledButton from "../Buttons/UnstyledButton";
 import RateComponent from "../RateComponent";
 
+
 interface CustomCardProps {
   date: string;
   popularity: number;
@@ -28,6 +30,7 @@ interface CustomCardProps {
   rate: number;
   isFavorite: boolean;
   list: number[];
+  handleGoToDetails: () => void;
   handleAddMovie?: () => void;
   handleRemoveMovie: () => void;
 }
@@ -41,6 +44,7 @@ const MoviesCard: FC<CustomCardProps> = ({
   rate,
   isFavorite,
   list,
+  handleGoToDetails,
   handleAddMovie,
   handleRemoveMovie,
 }) => {
@@ -79,12 +83,18 @@ const MoviesCard: FC<CustomCardProps> = ({
         </CustomUnstyledButton>
       )}
 
-      <Link to={link} className="flex max-w-[482px] 2xl:max-w-full">
+      <Link
+        to={link}
+        onClick={handleGoToDetails}
+        className="flex max-w-[482px] 2xl:max-w-full"
+      >
         <Box className="grid flex-1 grid-cols-[119px_1fr] gap-4 lg:flex lg:flex-col lg:gap-2">
           {image ? (
             <Image
               className="lg:w-full"
               src={`${IMAGE_URL}${image}`}
+              width="100"
+              height="170"
               alt={title}
             />
           ) : isScreenLg ? (

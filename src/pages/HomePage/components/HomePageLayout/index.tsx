@@ -54,6 +54,7 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
   handleRemoveMovieFromFavorite,
   isAddMovieToFavorite,
   handlePageChange,
+  handleGetMovieDetails,
 }) => {
   return (
     <>
@@ -189,8 +190,15 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
                               popularity={popularity}
                               list={genre_ids}
                               isFavorite={isAddMovieToFavorite(id)}
-                              handleAddMovie={() => handleAddMovieToFavorite(id)}
-                              handleRemoveMovie={() => handleRemoveMovieFromFavorite(id)}
+                              handleAddMovie={() =>
+                                handleAddMovieToFavorite(id)
+                              }
+                              handleRemoveMovie={() =>
+                                handleRemoveMovieFromFavorite(id)
+                              }
+                              handleGoToDetails={() =>
+                                handleGetMovieDetails(id)
+                              }
                             />
                           );
                         },

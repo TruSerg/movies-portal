@@ -1,17 +1,13 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useContext } from "react";
 
 import {
   useGetMovieGenresQuery,
   useLazySearchMoviesQuery,
 } from "../../../store/movies.api";
-
-import {
-  handleMoviesListChange,
-} from "../../../store/searchMoviesSlice";
+import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
 
 import { getRequestErrors } from "../../../utils/getRequestErrors";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 import {
   useFavoriteMovies,
   useModal,
@@ -23,16 +19,10 @@ import {
 import HomePageLayout from "../components/HomePageLayout";
 
 const HomePageContainer: FC = () => {
-  const dispatch = useAppDispatch();
   const [isFirstRequest, setIsFirstRequest] = useState(false);
 
-  const { moviesList, movie } = useAppSelector((state) => state.searchMovies);
+  const { movie, handleGetMovieDetails } = useContext(MovieDetailsContext);
 
-  const {
-    handleAddFavoriteMovie,
-    handleRemoveFavoriteMovie,
-    isAddMovieToFavorite,
-  } = useFavoriteMovies();
   const {
     moviesGenreValue,
     rateFrom,
@@ -46,8 +36,6 @@ const HomePageContainer: FC = () => {
   const { currentPage, handlePageChange } = usePagination();
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
   const { yearPickerValue, handleYearPickerValueChange } = useYearPickerInput();
-
-  console.log("moviesGenreValue: ", moviesGenreValue);
 
   const {
     data: genres,
@@ -100,21 +88,16 @@ const HomePageContainer: FC = () => {
   }, [isFirstRequest, currentPage, sortValue]);
 
   const searchMovies = movies?.results;
+  console.log('searchMovies: ', searchMovies);
   const totalPages = movies?.total_pages;
-  const movieTitle = movie.title;
+  const movieTitle = movie?.title;
   const genresErrorChange = getRequestErrors(genresError);
 
-  const handleAddMovieToFavorite = (id: number) => {
-    handleAddFavoriteMovie(id);
-  };
-
-  const handleRemoveMovieFromFavorite = (id: number) => {
-    handleRemoveFavoriteMovie(id);
-  };
-
-  useEffect(() => {
-    dispatch(handleMoviesListChange(searchMovies));
-  }, [dispatch, searchMovies]);
+  const {
+    handleAddMovieToFavorite,
+    handleRemoveMovieFromFavorite,
+    isAddMovieToFavorite,
+  } = useFavoriteMovies(searchMovies ? searchMovies : []);
 
   return (
     <HomePageLayout
@@ -132,8 +115,8 @@ const HomePageContainer: FC = () => {
       genresErrorChange={genresErrorChange ? genresErrorChange : ""}
       yearPickerValue={yearPickerValue ? yearPickerValue : null}
       currentPage={currentPage}
-      movieTitle={movieTitle}
-      moviesList={moviesList ? moviesList : []}
+      movieTitle={movieTitle ? movieTitle : ""}
+      moviesList={searchMovies ? searchMovies : []}
       genres={genres ? genres : []}
       handleFormSubmit={handleFormSubmit}
       handleMovieValueChange={handleMovieValueChange}
@@ -146,6 +129,7 @@ const HomePageContainer: FC = () => {
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
       handlePageChange={handlePageChange}
+      handleGetMovieDetails={handleGetMovieDetails}
     />
   );
 };

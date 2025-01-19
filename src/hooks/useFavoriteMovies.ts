@@ -1,38 +1,47 @@
-import { IMovie } from '../interfaces/searchMoviesDataInterfaces';
+import {
+  IMovie,
+  IMovieDetails,
+} from "../interfaces/searchMoviesDataInterfaces";
 
-import { useAppSelector } from './useStoreHooks';
-import useLocalStorage from './useLocalStorage';
+import useLocalStorage from "./useLocalStorage";
 
-const useFavoriteMovies = () => {
-	const [favoriteMovies, setFavoriteMovies] = useLocalStorage(
+const useFavoriteMovies = (moviesList: IMovie[]) => {
+  const [favoriteMovies, setFavoriteMovies] = useLocalStorage(
     "favoriteMovies",
     [] as IMovie[],
   );
 
-	const { moviesList } = useAppSelector(state => state.searchMovies);
+  const handleAddMovieToFavorite = (id: number) => {
+    moviesList.filter((movie) => {
+      if (movie.id === id) {
+        setFavoriteMovies([...favoriteMovies, movie]);
+      }
+    });
+  };
 
-	const handleAddFavoriteMovie = (id: number) => {
-		moviesList.filter(movie => {
-			if (movie.id === id) {
-				setFavoriteMovies([...favoriteMovies, movie]);
-			}
-		});
-	};
+  const handleAddMovieFromDetailsToFavorite = (movieDetails: IMovie) => {
+    favoriteMovies.forEach((movie: IMovie) => {
+      if (movie.id !== movieDetails.id) {
+        setFavoriteMovies([...favoriteMovies, movieDetails]);
+      }
+    });
+  };
 
-	const handleRemoveFavoriteMovie = (id: number) => {
-		setFavoriteMovies(
+  const handleRemoveMovieFromFavorite = (id: number) => {
+    setFavoriteMovies(
       favoriteMovies.filter((movie: IMovie) => movie.id !== id),
     );
-	};
+  };
 
-	const isAddMovieToFavorite = (id: number) => {
-		return favoriteMovies?.findIndex((movie: IMovie) => movie.id === id) !== -1;
-	};
+  const isAddMovieToFavorite = (id: number) => {
+    return favoriteMovies?.findIndex((movie: IMovie) => movie.id === id) !== -1;
+  };
 
-	return {
+  return {
     favoriteMovies,
-    handleAddFavoriteMovie,
-    handleRemoveFavoriteMovie,
+    handleAddMovieToFavorite,
+    handleAddMovieFromDetailsToFavorite,
+    handleRemoveMovieFromFavorite,
     isAddMovieToFavorite,
   };
 };

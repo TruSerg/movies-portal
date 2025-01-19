@@ -28,6 +28,7 @@ const TrendingPageLayout: FC<TrendingPageLayoutProps> = ({
   handleRemoveMovieFromFavorite,
   handlePageChange,
   handleModalClose,
+  handleGetMovieDetails,
 }) => {
   return (
     <>
@@ -76,6 +77,7 @@ const TrendingPageLayout: FC<TrendingPageLayoutProps> = ({
                             handleRemoveMovie={() =>
                               handleRemoveMovieFromFavorite(id)
                             }
+                            handleGoToDetails={() => handleGetMovieDetails(id)}
                           />
                         );
                       },

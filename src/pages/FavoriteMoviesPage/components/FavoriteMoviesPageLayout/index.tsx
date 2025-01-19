@@ -15,10 +15,11 @@ const FavoriteMoviesPageLayout: FC<FavoriteMoviesPageLayoutProps> = ({
   totalPages,
   currentPage,
   favoriteMovies,
-  list,
+  slicedMoviesList,
   handleRemoveMovieFromFavorite,
   isAddMovieToFavorite,
   handlePageChange,
+  handleGetMovieDetails,
 }) => {
   return (
     <main className="m-[0_auto] w-full max-w-[1010px] pb-10 pl-[15px] pr-[15px] pt-10 xl:pb-5 xl:pt-5 lg:text-[28px] sm:text-[24px]">
@@ -35,7 +36,7 @@ const FavoriteMoviesPageLayout: FC<FavoriteMoviesPageLayoutProps> = ({
                 />
 
                 <ul className="grid grid-cols-2 gap-4 lg:grid-cols-3 md:grid-cols-2 sm:gap-2">
-                  {list?.map(
+                  {slicedMoviesList?.map(
                     ({
                       id,
                       poster_path,
@@ -59,6 +60,7 @@ const FavoriteMoviesPageLayout: FC<FavoriteMoviesPageLayoutProps> = ({
                           handleRemoveMovie={() =>
                             handleRemoveMovieFromFavorite(id)
                           }
+                          handleGoToDetails={() => handleGetMovieDetails(id)}
                         />
                       );
                     },

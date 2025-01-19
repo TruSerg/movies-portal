@@ -29,6 +29,7 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
   handleAddMovieToFavorite,
   handleRemoveMovieFromFavorite,
   isAddMovieToFavorite,
+  handleGetMovieDetails,
 }) => {
   return (
     <>
@@ -73,6 +74,7 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
                             handleRemoveMovie={() =>
                               handleRemoveMovieFromFavorite(id)
                             }
+                            handleGoToDetails={() => handleGetMovieDetails(id)}
                           />
                         );
                       },
