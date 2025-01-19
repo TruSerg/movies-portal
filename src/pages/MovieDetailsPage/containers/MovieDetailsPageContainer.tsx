@@ -12,8 +12,14 @@ import {
 import { useFavoriteMovies } from "../../../hooks";
 
 const MovieDetailsPageContainer = () => {
-  const { isMovieLoading, isMovieFetching, isMovieError,  movieError, movie, movieVideo } =
-    useContext(MovieDetailsContext);
+  const {
+    isMovieLoading,
+    isMovieFetching,
+    isMovieError,
+    movieError,
+    movie,
+    movieVideo,
+  } = useContext(MovieDetailsContext);
 
   console.log("movie: ", movie);
 
@@ -27,7 +33,7 @@ const MovieDetailsPageContainer = () => {
 
   const movieId = movie?.id;
   const title = movie?.title;
-  const image = movie?.backdrop_path;;
+  const image = movie?.backdrop_path;
   const date = movie?.release_date;
   const rate = movie?.vote_average;
   const popularity = movie?.popularity;
@@ -63,7 +69,6 @@ const MovieDetailsPageContainer = () => {
     vote_count: movie?.vote_count,
   };
 
-  const cashedNewMovie = useMemo(() => newMovie, []);
 
   return (
     <MovieDetailsPageLayout
@@ -72,6 +77,7 @@ const MovieDetailsPageContainer = () => {
       isMovieError={isMovieError}
       isFavorite={isFavorite}
       movieError={movieError}
+      newMovie={newMovie as IMovie}
       movie={movie as IMovieDetails}
       image={image ? image : ""}
       title={title ? title : ""}
@@ -86,12 +92,8 @@ const MovieDetailsPageContainer = () => {
       movieTrailerId={movieTrailerId ? movieTrailerId : ""}
       movieDescription={movieDescription ? movieDescription : ""}
       movieProduction={movieProduction ? movieProduction : []}
-      handleRemoveMovie={() =>
-        handleRemoveMovieFromFavorite(movieId ? movieId : 0)
-      }
-      handleAddMovie={() =>
-        handleAddMovieFromDetailsToFavorite(cashedNewMovie as IMovie)
-      }
+      handleRemoveMovie={handleRemoveMovieFromFavorite}
+      handleAddMovie={handleAddMovieFromDetailsToFavorite}
     />
   );
 };

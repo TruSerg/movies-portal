@@ -24,6 +24,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
   isMovieError,
   isFavorite,
   movieError,
+  newMovie,
   movie,
   image,
   title,
@@ -58,7 +59,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
                       <Box className="flex flex-1 flex-col">
                         {image ? (
                           <Image
-                            className="sm:mb-3 mb-5"
+                            className="mb-5 sm:mb-3"
                             src={`${IMAGE_URL}${image}`}
                             width="250"
                             height="352"
@@ -77,7 +78,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
                             />
                             {isFavorite ? (
                               <CustomUnstyledButton
-                                handleClick={handleRemoveMovie}
+                                handleClick={() => handleRemoveMovie(movie.id)}
                                 className="z-50 flex-shrink-0 cursor-pointer p-3"
                               >
                                 <Image
@@ -88,7 +89,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
                               </CustomUnstyledButton>
                             ) : (
                               <CustomUnstyledButton
-                                handleClick={handleAddMovie}
+                                handleClick={() => handleAddMovie(newMovie)}
                                 className="z-50 flex-shrink-0 cursor-pointer p-3"
                               >
                                 <Image

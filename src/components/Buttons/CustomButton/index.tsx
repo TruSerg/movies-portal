@@ -3,7 +3,7 @@ import { Button, MantineRadius } from "@mantine/core";
 
 interface CustomButtonProps {
   form?: string;
-  type?: string;
+  type?: "button" | "submit" | "reset" | undefined;
   color?: string;
   variant?: string;
   radius?: MantineRadius;

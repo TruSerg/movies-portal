@@ -118,6 +118,7 @@ export interface MovieDetailsPageLayoutProps {
     | ISearchMoviesDataErrorObject
     | SerializedError
     | undefined;
+  newMovie: IMovie;
   movie: IMovieDetails;
   image: string;
   title: string;
@@ -133,5 +134,5 @@ export interface MovieDetailsPageLayoutProps {
   movieDescription: string;
   movieProduction: IProductionCompany[];
   handleRemoveMovie: (id: number) => void;
-  handleAddMovie: (id: number) => void;
+  handleAddMovie: (newMovie: IMovie) => void;
 }

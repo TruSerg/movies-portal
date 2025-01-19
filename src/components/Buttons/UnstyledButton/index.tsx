@@ -5,7 +5,7 @@ interface CustomButtonProps {
   text?: string;
   className?: string;
   children: ReactNode;
-  handleClick?: (id: number) => void;
+  handleClick?: () => void;
 }
 
 const CustomUnstyledButton: FC<CustomButtonProps> = ({
