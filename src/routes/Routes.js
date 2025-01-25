@@ -8,6 +8,8 @@ import TrendingMoviesPageContainer from "../pages/TrendingMoviesPage/containers/
 import FavoriteMoviesPageContainer from "../pages/FavoriteMoviesPage/containers/FavoriteMoviesPageContainer";
 import MovieDetailsPageContainer from "../pages/MovieDetailsPage/containers/MovieDetailsPageContainer";
 import SearchMoviesPageContainer from "../pages/SearchMoviePage/containers/SearchMoviesPageContainer";
+import SignupPageContainer from "../pages/SignUpPage/containers/SignUpPageContainer";
+import SignInPageContainer from "../pages/SignInPage/containers/SignInPageContainer";
 
 const AppRoutes = () => {
   return (
@@ -30,6 +32,9 @@ const AppRoutes = () => {
         path={ROUTES.SEARCH_MOVIES_PAGE}
         element={<SearchMoviesPageContainer />}
       />
+      <Route path={ROUTES.SIGNUP_PAGE} element={<SignupPageContainer />} />
+
+      <Route path={ROUTES.SIGNIN_PAGE} element={<SignInPageContainer />} />
 
       <Route path="*" element={<Navigate to={ROUTES.HOME_PAGE} />} />
     </Routes>

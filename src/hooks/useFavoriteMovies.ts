@@ -1,6 +1,5 @@
 import {
   IMovie,
-  IMovieDetails,
 } from "../interfaces/searchMoviesDataInterfaces";
 
 import useLocalStorage from "./useLocalStorage";

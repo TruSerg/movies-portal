@@ -1,13 +1,14 @@
 import { FC, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Image } from "@mantine/core";
 import { Box, Card, Text } from "@mantine/core";
 
-import {
-  useGetMovieGenresQuery,
-} from "../../store/movies.api";
+import { ROUTES } from "../../routes/routeNames";
+
+import { useGetMovieGenresQuery } from "../../store/movies.api";
 
 import { useReplaceGenreId, useResize } from "../../hooks";
+import { useAppSelector } from "../../hooks/useStoreHooks";
 
 import { IGenre } from "../../interfaces/searchMoviesDataInterfaces";
 import { IMAGE_URL } from "../../const";
@@ -19,7 +20,6 @@ import NoImageSmall from "../NoImage/NoImageSmall";
 import NoImageBig from "../NoImage/NoImageBig";
 import CustomUnstyledButton from "../Buttons/UnstyledButton";
 import RateComponent from "../RateComponent";
-
 
 interface CustomCardProps {
   date: string;
@@ -48,6 +48,14 @@ const MoviesCard: FC<CustomCardProps> = ({
   handleAddMovie,
   handleRemoveMovie,
 }) => {
+  const navigate = useNavigate();
+
+  const { isAuth } = useAppSelector((state) => state.signUpUser);
+
+  const handleGoToRegistration = () => {
+    navigate(ROUTES.SIGNUP_PAGE);
+  };
+
   const { data: genres } = useGetMovieGenresQuery();
 
   const { genresList, replaceGenreIdToGenreString } = useReplaceGenreId();
@@ -61,7 +69,7 @@ const MoviesCard: FC<CustomCardProps> = ({
     <Card radius="md" shadow="sm" className="relative w-full sm:p-2">
       {isFavorite ? (
         <CustomUnstyledButton
-          handleClick={handleRemoveMovie}
+          handleClick={isAuth ? handleRemoveMovie : handleGoToRegistration}
           className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
         >
           <Image
@@ -72,7 +80,7 @@ const MoviesCard: FC<CustomCardProps> = ({
         </CustomUnstyledButton>
       ) : (
         <CustomUnstyledButton
-          handleClick={handleAddMovie}
+          handleClick={isAuth ? handleAddMovie : handleGoToRegistration}
           className="absolute right-1 top-1 z-50 flex-shrink-0 cursor-pointer p-3 lg:right-4 lg:top-4 sm:right-2 sm:top-2"
         >
           <Image

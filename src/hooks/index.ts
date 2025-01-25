@@ -9,3 +9,4 @@ export { default as useFavoriteMovies } from "./useFavoriteMovies";
 export { default as useLocalStorage } from "./useLocalStorage";
 export { default as useInput } from "./useInput";
 export { default as useDebounce } from "./useDebounce";
+export { default as useRegistration } from "./useRegistration";
