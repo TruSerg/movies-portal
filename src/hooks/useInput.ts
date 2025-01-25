@@ -1,27 +1,15 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from "react";
 
 const useInput = (initialValue: string) => {
-	const [value, setValue] = useState(initialValue);
+  const [inputValue, setInputValue] = useState(initialValue);
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setValue(e.currentTarget.value);
-	};
+  const handleInputValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
 
-	// const checkInputSearchBlur = useCallback(() => {
-	//   setIsFocus(false);
-	//   dispatch(productSearchValueChange(""));
-	// }, [dispatch]);
-
-	// const checkInputSearchFocus = () => {
-	//   setIsFocus(true);
-	// };
-
-	return {
-		// isFocus,
-		value,
-		handleChange,
-		// checkInputSearchBlur,
-		// checkInputSearchFocus,
-	};
+  return {
+    inputValue,
+    handleInputValueChange,
+  };
 };
 export default useInput;

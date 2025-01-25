@@ -39,6 +39,7 @@ export interface MoviesSearchParams {
   from?: string;
   to?: string;
   moviesFilterValue?: string;
+  debouncedSearchMovieInputValue?: string;
   searchValue?: string;
 }
 

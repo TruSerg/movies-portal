@@ -1,8 +1,8 @@
 import { ChangeEvent, FC } from "react";
 import { Input } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
 
 import { useResize } from "../../../hooks";
-import { IconSearch } from "@tabler/icons-react";
 
 interface BasicInputProps {
   className: string;

@@ -7,6 +7,7 @@ import MoviesPageContainer from "../pages/MoviesPage/containers/MoviesPageContai
 import TrendingMoviesPageContainer from "../pages/TrendingMoviesPage/containers/TrendingMoviesPageContainer";
 import FavoriteMoviesPageContainer from "../pages/FavoriteMoviesPage/containers/FavoriteMoviesPageContainer";
 import MovieDetailsPageContainer from "../pages/MovieDetailsPage/containers/MovieDetailsPageContainer";
+import SearchMoviesPageContainer from "../pages/SearchMoviePage/containers/SearchMoviesPageContainer";
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,10 @@ const AppRoutes = () => {
       <Route
         path={ROUTES.MOVIE_DETAILS_PAGE}
         element={<MovieDetailsPageContainer />}
+      />
+      <Route
+        path={ROUTES.SEARCH_MOVIES_PAGE}
+        element={<SearchMoviesPageContainer />}
       />
 
       <Route path="*" element={<Navigate to={ROUTES.HOME_PAGE} />} />

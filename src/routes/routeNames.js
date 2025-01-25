@@ -4,4 +4,5 @@ export const ROUTES = {
   TRENDING_MOVIES_PAGE: "/trending",
   FAVORITE_MOVIES_PAGE: "/favorites",
   MOVIE_DETAILS_PAGE: "/details/:movieId",
+  SEARCH_MOVIES_PAGE: "/search",
 };

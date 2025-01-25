@@ -1,7 +1,7 @@
 import { ReactNode, FC } from "react";
 import { Box } from "@mantine/core";
 
-import SideBar from "../SideBar";
+import SideBar from "../SideBar/SideBar";
 import Container from "../Container";
 
 interface MainLayoutProps {

@@ -59,9 +59,12 @@ export const moviesApi = createApi({
       query: ({ moviesFilterValue, currentPage }) =>
         `movie/${moviesFilterValue}?include_video=true&language=ru&page=${currentPage}`,
     }),
-    searchMoviesByTitle: builder.query<MoviesServerResponse, string>({
-      query: (searchValue) =>
-        `search/movie?include_video=true&language=ru&query=${searchValue}`,
+    searchMoviesByTitle: builder.query<
+      MoviesServerResponse,
+      MoviesSearchParams
+    >({
+      query: ({ currentPage, debouncedSearchMovieInputValue }) =>
+        `search/movie?query=${debouncedSearchMovieInputValue}&include_adult=false&language=ru&page=${currentPage}`,
     }),
     getMovieDetails: builder.query<IMovieDetails, number>({
       query: (movieId) => `movie/${movieId}?language=ru`,

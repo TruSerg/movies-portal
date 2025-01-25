@@ -88,7 +88,6 @@ const HomePageContainer: FC = () => {
   }, [isFirstRequest, currentPage, sortValue]);
 
   const searchMovies = movies?.results;
-  console.log('searchMovies: ', searchMovies);
   const totalPages = movies?.total_pages;
   const movieTitle = movie?.title;
   const genresErrorChange = getRequestErrors(genresError);

@@ -1,41 +1,23 @@
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { ChangeEvent, FC } from "react";
+import { Link } from "react-router-dom";
 import { Box, UnstyledButton } from "@mantine/core";
 
 import { ROUTES } from "../../routes/routeNames";
 
-import { useLazySearchMoviesByTitleQuery } from "../../store/movies.api";
-
-import { useDebounce, useInput } from "../../hooks";
-
 import CustomMenu from "../Menu";
 import BasicInput from "../Inputs/SearchInput";
 
-const SideBar = () => {
-  const { pathname } = useLocation();
+interface SideBarLayoutProps {
+  pathname: string;
+  inputValue: string;
+  handleInputValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
 
-  const { value, handleChange } = useInput("");
-  const debouncedSearchMovieInputValue = useDebounce(value);
-
-  const [
-    fetchSearchMoviesByTitle,
-    {
-      data: movies,
-      isLoading: isMoviesLoading,
-      isFetching: isMoviesFetching,
-      isError: isMoviesError,
-      error: moviesError,
-    },
-  ] = useLazySearchMoviesByTitleQuery();
-
-  console.log("movies: ", movies);
-
-  useEffect(() => {
-    fetchSearchMoviesByTitle(
-      debouncedSearchMovieInputValue.trim().toLowerCase(),
-    );
-  }, [fetchSearchMoviesByTitle, debouncedSearchMovieInputValue]);
-
+const SideBarLayout: FC<SideBarLayoutProps> = ({
+  pathname,
+  inputValue,
+  handleInputValueChange,
+}) => {
   return (
     <Box className="min-h-screen w-[100%] max-w-[280px] bg-purple-100 p-6 xl:flex xl:min-h-0 xl:max-w-[1470px] xl:flex-col xl:items-start xl:gap-5 xl:pl-[15px] xl:pr-[15px]">
       <Box className="mb-10 flex items-center gap-2 xl:mb-0">
@@ -89,12 +71,12 @@ const SideBar = () => {
       </Box>
       <BasicInput
         className="w-full max-w-[400px]"
-        searchValue={value}
+        searchValue={inputValue}
         placeholder="Поиск..."
-        handleChange={handleChange}
+        handleChange={handleInputValueChange}
       />
     </Box>
   );
 };
 
-export default SideBar;
+export default SideBarLayout;

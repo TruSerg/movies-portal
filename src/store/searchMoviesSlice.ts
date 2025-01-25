@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IGenre, IMovie } from "../interfaces/searchMoviesDataInterfaces";
 
 interface SearchMoviesState {
-  movie: IMovie;
+  searchMovieValue: string;
   moviesList: IMovie[];
   ratedMovies: IMovie[];
   genresList: IGenre[];
@@ -12,7 +12,7 @@ interface SearchMoviesState {
 }
 
 const initialState: SearchMoviesState = {
-  movie: {} as IMovie,
+  searchMovieValue: "",
   moviesList: [],
   ratedMovies: [],
   genresList: [],
@@ -36,9 +36,8 @@ const searchMoviesSlice = createSlice({
     handleMoviesListChange(state, { payload }) {
       state.moviesList = payload;
     },
-    findMovie(state, { payload }) {
-      const movie = state.moviesList.find((item) => item.id === payload);
-      state.movie = { ...state.movie, ...movie };
+    handleSearchMovieValueChange(state, { payload }) {
+      state.searchMovieValue = payload;
     },
   },
 });
@@ -48,7 +47,7 @@ export const {
   changeTitleMovies,
   handleGenresListChange,
   handleMoviesListChange,
-  findMovie,
+  handleSearchMovieValueChange,
 } = searchMoviesSlice.actions;
 
 export default searchMoviesSlice.reducer;

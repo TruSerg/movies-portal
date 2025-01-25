@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
 
@@ -28,8 +28,6 @@ const MovieDetailsPageContainer = () => {
     handleRemoveMovieFromFavorite,
     isAddMovieToFavorite,
   } = useFavoriteMovies([]);
-  console.log("movie: ", movie);
-  console.log("movieVideo: ", movieVideo);
 
   const movieId = movie?.id;
   const title = movie?.title;
