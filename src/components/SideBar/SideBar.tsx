@@ -6,7 +6,12 @@ import { ROUTES } from "../../routes/routeNames";
 import { handleSearchMovieValueChange } from "../../store/searchMoviesSlice";
 import { useLazySearchMoviesByTitleQuery } from "../../store/movies.api";
 
-import { useDebounce, useInput, usePagination, useRegistration } from "../../hooks";
+import {
+  useDebounce,
+  useInput,
+  usePagination,
+  useRegistration,
+} from "../../hooks";
 import { useAppDispatch, useAppSelector } from "../../hooks/useStoreHooks";
 
 import SideBarLayout from "./SideBarLayout";
@@ -18,7 +23,7 @@ const SideBar = () => {
 
   const { isAuth, userName } = useAppSelector((state) => state.signUpUser);
 
-  const {logOut, removeAccount} = useRegistration()
+  const { logOut, removeAccount } = useRegistration();
   const { currentPage } = usePagination();
   const { inputValue, handleInputValueChange } = useInput("");
   const debouncedSearchMovieInputValue = useDebounce(inputValue);

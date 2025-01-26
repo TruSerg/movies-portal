@@ -14,9 +14,10 @@ const useRegistration = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { isAuth, userName } = useAppSelector((state) => state.signUpUser);
-
+  const [errorMessage, setErrorMessage] = useState("");
   const [key, setKey] = useState("");
+
+  const { isAuth, userName } = useAppSelector((state) => state.signUpUser);
 
   const { formData, handleFormFieldChange, handleFormReset } = useForm({
     userName: "",
@@ -46,8 +47,11 @@ const useRegistration = () => {
           setUser(formData.password);
 
           handleFormReset();
+
+          handleModalOpen();
         } else {
-          console.log("Вы уже зарегистрированы");
+          setErrorMessage("У вас уже есть аккаунт!");
+
           handleFormReset();
         }
       }
@@ -69,6 +73,10 @@ const useRegistration = () => {
     navigate(ROUTES.SIGNUP_PAGE);
   };
 
+  const handleGoToSignIn = () => {
+    navigate(ROUTES.SIGNIN_PAGE);
+  };
+
   const handleModalOpenToRegistration = () => {
     if (!isAuth) {
       handleModalOpen();
@@ -81,6 +89,7 @@ const useRegistration = () => {
     isPasswordValid,
     isPasswordConfirmValid,
     isFormValid,
+    errorMessage,
     user,
     formData,
     handleFormFieldChange,
@@ -89,6 +98,7 @@ const useRegistration = () => {
     logOut,
     removeAccount,
     handleGoToRegistration,
+    handleGoToSignIn,
     handleModalOpenToRegistration,
     handleModalClose,
   };

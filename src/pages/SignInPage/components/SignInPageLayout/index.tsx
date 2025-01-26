@@ -13,9 +13,11 @@ import InputPassword from "../../../../components/Inputs/FormInputs/InputPasswor
 
 interface SignInPageLayoutProps {
   isFocus: boolean;
+  isVisible: boolean;
   isFormValid: boolean;
   isUserNameValid: boolean;
   isPasswordValid: boolean;
+  errorMessage: string;
   formData: ISignUpFormData;
   handleFormFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleFormSubmit: (e: globalThis.KeyboardEvent) => void;
@@ -24,9 +26,11 @@ interface SignInPageLayoutProps {
 }
 const SignInPageLayout: FC<SignInPageLayoutProps> = ({
   isFocus,
+  isVisible,
   isFormValid,
   isUserNameValid,
   isPasswordValid,
+  errorMessage,
   formData,
   handleFormFieldChange,
   handleFormSubmit,
@@ -38,12 +42,15 @@ const SignInPageLayout: FC<SignInPageLayoutProps> = ({
       <CustomForm
         id="SignUpForm"
         handleSubmit={handleFormSubmit}
-        className="mb-2 flex w-full max-w-[450px] flex-col justify-center gap-5 rounded-md border border-solid border-purple-300 p-5 sm:p-3"
+        className="mb-2 flex w-full max-w-[450px] flex-col justify-center gap-5 rounded-md border border-solid border-purple-300 p-5 lg:gap-4 sm:p-3"
       >
         <Heading
           text="Вход"
-          className="mb-5 text-center text-[28px] font-bold lg:mb-3 lg:text-[24px] sm:mb-2 sm:text-[22px]"
+          className="mb-4 text-center text-[28px] font-bold lg:mb-3 lg:text-[24px] sm:mb-2 sm:text-[22px]"
         />
+        
+        {isVisible && <span className="text-red-500">{errorMessage}</span>}
+
         <FormInput
           value={formData.userName}
           name="userName"

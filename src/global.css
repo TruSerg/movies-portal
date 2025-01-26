@@ -13,11 +13,12 @@
 .mantine-PickerControl-pickerControl:focus {
   @apply bg-purple-500;
 }
+
 .mantine-Input-input:focus {
   @apply border-purple-500;
 }
 
-.mantine-PasswordInput:focus {
+.mantine-PasswordInput-input:focus-within {
   @apply border-purple-500;
 }
 

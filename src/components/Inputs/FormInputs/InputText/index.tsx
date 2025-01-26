@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from "react";
-import { Input } from "@mantine/core";
+import { TextInput } from "@mantine/core";
 
 import { useResize } from "../../../../hooks";
 
@@ -29,20 +29,19 @@ const InputText: FC<InputTextProps> = ({
   const { isScreenSm, isScreenLg } = useResize();
 
   return (
-    <Input.Wrapper label={label}>
-      <Input
-        value={value}
-        name={name}
-        radius="md"
-        size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
-        type={type}
-        error={error}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-      />
-    </Input.Wrapper>
+    <TextInput
+      label={label}
+      value={value}
+      name={name}
+      radius="md"
+      size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
+      type={type}
+      error={error}
+      placeholder={placeholder}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+    />
   );
 };
 

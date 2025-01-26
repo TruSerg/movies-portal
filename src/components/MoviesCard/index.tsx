@@ -176,14 +176,14 @@ const MoviesCard: FC<CustomCardProps> = ({
       >
         <Box className="border-gray border-t pt-3">
           <Heading
-            text={`Чтобы добавить фильм в избранное или удалить, нужно авторизоваться!`}
+            text={`Чтобы добавить фильм в избранное или удалить, необходимо авторизоваться!`}
             className="mb-4 text-[18px] font-bold lg:text-[16px] sm:mb-3 sm:text-[14px]"
           />
         </Box>
 
         <CustomUnstyledButton
           handleClick={handleGoToRegistration}
-          className="w-full rounded-lg pb-[10px] pl-[20px] pr-[20px] pt-[10px] text-center text-sm text-purple-500 transition-all delay-150 ease-in-out hover:bg-purple-500 hover:text-white"
+          className="w-full rounded-lg pb-[10px] pl-[20px] pr-[20px] pt-[10px] text-center text-base text-purple-500 transition-all delay-150 ease-in-out hover:bg-purple-500 hover:text-white"
         >
           Приступить к регистрации
         </CustomUnstyledButton>

@@ -13,7 +13,7 @@ const StartSearchingComponent = () => (
       c="dimmed"
       className="text-center text-2xl font-bold lg:text-xl sm:text-lg"
     >
-      Начните поиск фильмов
+      Начните поиск фильмов!
     </Text>
   </Box>
 );

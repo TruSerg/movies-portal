@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../../../routes/routeNames";
 
 import { saveUserName, signUpUser } from "../../../store/signUpSlice";
 
-import { useForm } from "../../../hooks";
+import { useForm, useVisible } from "../../../hooks";
 import { useAppDispatch } from "../../../hooks/useStoreHooks";
 
 import SignInPageLayout from "../components/SignInPageLayout";
@@ -13,6 +14,9 @@ const SignInPageContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const { isVisible } = useVisible(errorMessage);
   const {
     isFocus,
     formData,
@@ -35,6 +39,8 @@ const SignInPageContainer = () => {
       e.preventDefault();
 
       if (localStorage.getItem(formData.userName)) {
+        console.log(localStorage.getItem(formData.userName)?.toLowerCase());
+
         const userPasswordFromLc = localStorage
           .getItem(formData.userName)
           ?.replace(/["]/g, "");
@@ -49,10 +55,10 @@ const SignInPageContainer = () => {
 
           navigate(ROUTES.HOME_PAGE);
         } else {
-          console.log("Неправильно введён пароль");
+          setErrorMessage("Неправильно введён пароль!");
         }
       } else {
-        console.log("Пользователь с таким именем не найден");
+        setErrorMessage("Пользователь с таким именем не найден!");
       }
     }
   };
@@ -60,9 +66,11 @@ const SignInPageContainer = () => {
   return (
     <SignInPageLayout
       isFocus={isFocus}
+      isVisible={isVisible}
       isFormValid={isFormValid}
       isUserNameValid={isUserNameValid}
       isPasswordValid={isPasswordValid}
+      errorMessage={errorMessage}
       formData={formData}
       handleFormFieldChange={handleFormFieldChange}
       handleFormSubmit={handleFormSubmit}

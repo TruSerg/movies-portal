@@ -1,5 +1,4 @@
 import { ChangeEvent, FC } from "react";
-import { Link } from "react-router-dom";
 import { Box, Image, UnstyledButton } from "@mantine/core";
 
 import { ROUTES } from "../../routes/routeNames";
@@ -7,6 +6,7 @@ import { ROUTES } from "../../routes/routeNames";
 import CustomMenu from "../Menu";
 import BasicInput from "../Inputs/SearchInput";
 import CustomUnstyledButton from "../Buttons/UnstyledButton";
+import CustomLink from "../CustomLink";
 
 interface SideBarLayoutProps {
   isAuth: boolean;
@@ -30,15 +30,15 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
   return (
     <Box className="min-h-screen w-[100%] max-w-[280px] bg-purple-100 p-6 xl:flex xl:min-h-0 xl:max-w-[1470px] xl:flex-col xl:gap-8 xl:pl-[15px] xl:pr-[15px]">
       <Box className="mb-14 flex flex-col xl:mb-0 xl:flex-row xl:justify-between xl:gap-5 sm:flex-col sm:justify-end">
-        <Link
-          to={ROUTES.HOME_PAGE}
+        <CustomLink
+          href={ROUTES.HOME_PAGE}
           className="mb-14 flex items-center gap-2 sm:mb-0"
         >
           <span className="text-[28px] font-semibold text-purple-500 sm:text-[24px]">
             TMDB
           </span>
           <span className="h-6 w-16 rounded-full bg-purple-500 sm:h-5 sm:w-14"></span>
-        </Link>
+        </CustomLink>
 
         <Box className="flex flex-col items-center gap-2 sm:gap-1">
           <Image
@@ -55,13 +55,13 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
               <Box className="flex items-center gap-2">
                 <CustomUnstyledButton
                   handleClick={logOut}
-                  className="whitespace-nowrap p-2 text-base transition-colors delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
+                  className="whitespace-nowrap p-2 text-sm transition-colors delay-150 ease-in-out hover:text-purple-500 sm:text-xs"
                 >
                   Выйти
                 </CustomUnstyledButton>
                 <CustomUnstyledButton
                   handleClick={removeAccount}
-                  className="whitespace-nowrap p-2 text-base transition-colors delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
+                  className="whitespace-nowrap p-2 text-sm transition-colors delay-150 ease-in-out hover:text-purple-500 sm:text-xs"
                 >
                   Удалить аккаунт
                 </CustomUnstyledButton>
@@ -69,42 +69,39 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
             </>
           ) : (
             <Box className="flex items-center gap-1">
-              <Link
-                to={ROUTES.SIGNIN_PAGE}
+              <CustomLink
+                href={ROUTES.SIGNIN_PAGE}
+                text="Войти"
                 className={
                   pathname === ROUTES.SIGNIN_PAGE
                     ? "whitespace-nowrap rounded-lg bg-purple-200 p-2 text-sm font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-xs"
                     : "whitespace-nowrap rounded-lg bg-transparent p-2 text-sm text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-xs"
                 }
-              >
-                Войти
-              </Link>
-
-              <Link
-                to={ROUTES.SIGNUP_PAGE}
+              />
+              <CustomLink
+                href={ROUTES.SIGNUP_PAGE}
+                text="Регистрация"
                 className={
                   pathname === ROUTES.SIGNUP_PAGE
                     ? "whitespace-nowrap rounded-lg bg-purple-200 p-2 text-sm font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-xs"
                     : "whitespace-nowrap rounded-lg bg-transparent p-2 text-sm text-black delay-150 ease-in-out hover:text-purple-500 sm:text-xs"
                 }
-              >
-                Регистрация
-              </Link>
+              />
             </Box>
           )}
         </Box>
       </Box>
       <Box className="mb-8 flex flex-col flex-wrap gap-2 xl:mb-0 xl:flex-row">
-        <Link
-          to={ROUTES.HOME_PAGE}
+        <CustomLink
+          href={ROUTES.HOME_PAGE}
+          text="Поиск по жанрам"
           className={
             pathname === ROUTES.HOME_PAGE
               ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-sm"
               : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
           }
-        >
-          По жанрам
-        </Link>
+        />
+
         <CustomMenu>
           <UnstyledButton
             className={
@@ -116,26 +113,25 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
             Фильмы
           </UnstyledButton>
         </CustomMenu>
-        <Link
-          to={ROUTES.TRENDING_MOVIES_PAGE}
+        <CustomLink
+          href={ROUTES.TRENDING_MOVIES_PAGE}
+          text="В тренде"
           className={
             pathname === ROUTES.TRENDING_MOVIES_PAGE
               ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-sm"
               : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
           }
-        >
-          В тренде
-        </Link>
-        <Link
-          to={ROUTES.FAVORITE_MOVIES_PAGE}
+        />
+
+        <CustomLink
+          href={ROUTES.FAVORITE_MOVIES_PAGE}
+          text="Избранное"
           className={
             pathname === ROUTES.FAVORITE_MOVIES_PAGE
               ? "rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-sm"
               : "rounded-lg bg-transparent p-[10px] text-base text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
           }
-        >
-          Избранное
-        </Link>
+        />
       </Box>
       <BasicInput
         className="w-full max-w-[400px]"

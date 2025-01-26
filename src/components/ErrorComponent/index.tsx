@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { Image } from "@mantine/core";
 import { Box } from "@mantine/core";
 
+import { ROUTES } from "../../routes/routeNames";
+
 import Heading from "../Heading";
 import ErrorImage from "../../static/img/error.png";
 import CustomLink from "../CustomLink";
@@ -30,7 +32,13 @@ const ErrorComponent: FC<ErrorComponentProps> = ({ error }) => {
           text={`${error!}`}
         />
 
-        {pathname !== "/" ? <CustomLink href="/" text="На главную" /> : null}
+        {pathname !== "/" ? (
+          <CustomLink
+            className="whitespace-nowrap rounded-lg bg-purple-500 p-[10px] text-base font-bold text-white transition delay-150 ease-in-out hover:bg-purple-600 sm:p-2 sm:text-sm"
+            href={ROUTES.HOME_PAGE}
+            text="На главную"
+          />
+        ) : null}
       </Box>
     </Box>
   );

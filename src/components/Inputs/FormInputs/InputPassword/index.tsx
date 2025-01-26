@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from "react";
-import { Input, PasswordInput } from "@mantine/core";
+import { PasswordInput } from "@mantine/core";
 
 import { useResize } from "../../../../hooks";
 
@@ -29,20 +29,19 @@ const InputPassword: FC<FormInputProps> = ({
   const { isScreenSm, isScreenLg } = useResize();
 
   return (
-    <Input.Wrapper label={label}>
-      <PasswordInput
-        value={value}
-        name={name}
-        radius="md"
-        size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
-        type={type}
-        error={error}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-      />
-    </Input.Wrapper>
+    <PasswordInput
+      label={label}
+      value={value}
+      name={name}
+      radius="md"
+      size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
+      type={type}
+      error={error}
+      placeholder={placeholder}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+    />
   );
 };
 

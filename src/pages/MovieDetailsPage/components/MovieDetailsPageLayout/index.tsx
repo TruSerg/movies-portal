@@ -331,7 +331,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
 
         <CustomUnstyledButton
           handleClick={handleGoToRegistration}
-          className="w-full rounded-lg pb-[10px] pl-[20px] pr-[20px] pt-[10px] text-center text-sm text-purple-500 transition-all delay-150 ease-in-out hover:bg-purple-500 hover:text-white"
+          className="w-full rounded-lg pb-[10px] pl-[20px] pr-[20px] pt-[10px] text-center text-base text-purple-500 transition-all delay-150 ease-in-out hover:bg-purple-500 hover:text-white"
         >
           Приступить к регистрации
         </CustomUnstyledButton>

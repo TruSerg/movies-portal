@@ -1,19 +1,33 @@
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { FC, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
+import CustomUnstyledButton from "../Buttons/UnstyledButton";
 
 interface CustomLinkProps {
   href: string;
-  text: string;
+  text?: string;
+  children?: ReactNode;
+  className: string;
+  handleClick?: () => void;
 }
 
-const CustomLink: FC<CustomLinkProps> = ({ href, text }) => (
-  <Link
-    to={href}
-    className="whitespace-nowrap rounded-lg bg-purple-500 p-[10px] text-base font-bold text-white transition delay-150 ease-in-out hover:bg-purple-600 sm:p-2 sm:text-sm"
-  >
-    {text}
-  </Link>
-);
+const CustomLink: FC<CustomLinkProps> = ({
+  href,
+  text,
+  children,
+  className,
+  handleClick,
+}) => {
+  const navigate = useNavigate();
+
+  return (
+    <CustomUnstyledButton
+      handleClick={() => navigate(href) ?? handleClick}
+      className={className}
+    >
+      {text ?? children}
+    </CustomUnstyledButton>
+  );
+};
 
 export default CustomLink;
