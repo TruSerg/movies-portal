@@ -2,6 +2,7 @@ import { useState, useCallback, ChangeEvent } from "react";
 
 const useForm = (initialFormData: any) => {
   const [formData, setFormData] = useState(initialFormData);
+  const [isFocus, setIsFocus] = useState(false);
 
   const handleFormFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((state: any) => {
@@ -14,11 +15,26 @@ const useForm = (initialFormData: any) => {
     });
   };
 
-  const handleFormReset = useCallback(() => {
+  const handleFormReset = () => {
     setFormData(initialFormData);
-  }, [initialFormData]);
+  };
 
-  return { formData, handleFormFieldChange, handleFormReset };
+  const checkInputFormBlur = () => {
+    setIsFocus(false);
+  };
+
+  const checkInputFormFocus = () => {
+    setIsFocus(true);
+  };
+
+  return {
+    isFocus,
+    formData,
+    handleFormFieldChange,
+    handleFormReset,
+    checkInputFormBlur,
+    checkInputFormFocus,
+  };
 };
 
 export default useForm;

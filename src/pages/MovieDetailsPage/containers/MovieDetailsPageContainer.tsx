@@ -9,9 +9,18 @@ import {
   IMovieDetails,
   IProductionCompany,
 } from "../../../interfaces/searchMoviesDataInterfaces";
-import { useFavoriteMovies } from "../../../hooks";
+import { useFavoriteMovies, useRegistration } from "../../../hooks";
+import { useAppSelector } from "../../../hooks/useStoreHooks";
 
 const MovieDetailsPageContainer = () => {
+  const { isAuth } = useAppSelector((state) => state.signUpUser);
+
+  const {
+    isModalOpen,
+    handleModalOpenToRegistration,
+    handleModalClose,
+    handleGoToRegistration,
+  } = useRegistration();
   const {
     isMovieLoading,
     isMovieFetching,
@@ -20,8 +29,6 @@ const MovieDetailsPageContainer = () => {
     movie,
     movieVideo,
   } = useContext(MovieDetailsContext);
-
-  console.log("movie: ", movie);
 
   const {
     handleAddMovieFromDetailsToFavorite,
@@ -67,9 +74,10 @@ const MovieDetailsPageContainer = () => {
     vote_count: movie?.vote_count,
   };
 
-
   return (
     <MovieDetailsPageLayout
+      isAuth={isAuth}
+      isModalOpen={isModalOpen}
       isMovieLoading={isMovieLoading}
       isMovieFetching={isMovieFetching}
       isMovieError={isMovieError}
@@ -92,6 +100,9 @@ const MovieDetailsPageContainer = () => {
       movieProduction={movieProduction ? movieProduction : []}
       handleRemoveMovie={handleRemoveMovieFromFavorite}
       handleAddMovie={handleAddMovieFromDetailsToFavorite}
+      handleGoToRegistration={handleGoToRegistration}
+      handleModalOpenToRegistration={handleModalOpenToRegistration}
+      handleModalClose={handleModalClose}
     />
   );
 };

@@ -6,7 +6,7 @@ import {
 } from "../../../store/movies.api";
 import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
 
-import { useFavoriteMovies, useModal, usePagination } from "../../../hooks";
+import { useFavoriteMovies, usePagination } from "../../../hooks";
 import { useAppSelector } from "../../../hooks/useStoreHooks";
 
 import MoviesPageLayout from "../components/MoviesPageLayout";
@@ -15,15 +15,11 @@ const MoviesPageContainer = () => {
   const { moviesFilterValue, moviesFilterValueTitle } = useAppSelector(
     (state) => state.searchMovies,
   );
-  const { movie, handleGetMovieDetails } = useContext(MovieDetailsContext);
+  const { handleGetMovieDetails } = useContext(MovieDetailsContext);
 
   const { currentPage, handlePageChange } = usePagination();
 
-  const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
-
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
-
-  console.log(movie?.id);
 
   const [
     fetchMovies,
@@ -38,7 +34,6 @@ const MoviesPageContainer = () => {
 
   const moviesList = movies?.results;
   const totalPages = movies?.total_pages;
-  const movieTitle = movie?.title;
 
   const {
     handleAddMovieToFavorite,
@@ -56,15 +51,12 @@ const MoviesPageContainer = () => {
       isMoviesFetching={isMoviesFetching}
       isMoviesError={isMoviesError}
       isGenresLoading={isGenresLoading}
-      isModalOpen={isModalOpen}
       moviesError={moviesError}
       moviesFilterValueTitle={moviesFilterValueTitle}
-      movieTitle={movieTitle ? movieTitle : ""}
       moviesList={moviesList ? moviesList : []}
       totalPages={totalPages ? totalPages : 0}
       currentPage={currentPage}
       handlePageChange={handlePageChange}
-      handleModalClose={handleModalClose}
       handleAddMovieToFavorite={handleAddMovieToFavorite}
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}

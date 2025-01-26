@@ -8,8 +8,11 @@ interface FormInputProps {
   name: string;
   label: string;
   type: string;
+  error: string;
   placeholder: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: () => void;
+  handleFocus: () => void;
 }
 
 const InputPassword: FC<FormInputProps> = ({
@@ -17,8 +20,11 @@ const InputPassword: FC<FormInputProps> = ({
   name,
   label,
   type,
+  error,
   placeholder,
   handleChange,
+  handleBlur,
+  handleFocus,
 }) => {
   const { isScreenSm, isScreenLg } = useResize();
 
@@ -30,8 +36,11 @@ const InputPassword: FC<FormInputProps> = ({
         radius="md"
         size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
         type={type}
+        error={error}
         placeholder={placeholder}
         onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
       />
     </Input.Wrapper>
   );

@@ -6,7 +6,7 @@ import {
 } from "../../../store/movies.api";
 import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
 
-import { useFavoriteMovies, useModal, usePagination } from "../../../hooks";
+import { useFavoriteMovies, usePagination } from "../../../hooks";
 
 import TrendingPageLayout from "../components/TrendingMoviesPageLayout";
 
@@ -14,7 +14,6 @@ const TrendingMoviesPageContainer = () => {
   const { movie, handleGetMovieDetails } = useContext(MovieDetailsContext);
 
   const { currentPage, handlePageChange } = usePagination();
-  const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
 
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
 
@@ -43,16 +42,13 @@ const TrendingMoviesPageContainer = () => {
       isGenresLoading={isGenresLoading}
       isTrendingMoviesError={isTrendingMoviesError}
       trendingMoviesError={trendingMoviesError}
-      isModalOpen={isModalOpen}
       totalPages={totalPages ? totalPages : 0}
       currentPage={currentPage}
-      movieTitle={movieTitle ? movieTitle : ""}
       moviesList={trendingMoviesList ? trendingMoviesList : []}
       handleAddMovieToFavorite={handleAddMovieToFavorite}
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
       handlePageChange={handlePageChange}
-      handleModalClose={handleModalClose}
       handleGetMovieDetails={handleGetMovieDetails}
     />
   );

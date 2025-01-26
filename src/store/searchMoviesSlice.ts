@@ -3,27 +3,30 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IGenre, IMovie } from "../interfaces/searchMoviesDataInterfaces";
 
 interface SearchMoviesState {
+  movieTitle: string;
   searchMovieValue: string;
-  moviesList: IMovie[];
-  ratedMovies: IMovie[];
-  genresList: IGenre[];
   moviesFilterValue: string;
   moviesFilterValueTitle: string;
+  moviesList: IMovie[];
+  genresList: IGenre[];
 }
 
 const initialState: SearchMoviesState = {
+  movieTitle: "",
   searchMovieValue: "",
-  moviesList: [],
-  ratedMovies: [],
-  genresList: [],
   moviesFilterValue: "",
   moviesFilterValueTitle: "",
+  moviesList: [],
+  genresList: [],
 };
 
 const searchMoviesSlice = createSlice({
   name: "searchMovies",
   initialState,
   reducers: {
+    changeMovieTitle(state, { payload }) {
+      state.movieTitle = payload;
+    },
     changeMovieFilterValue(state, { payload }) {
       state.moviesFilterValue = payload;
     },
@@ -43,6 +46,7 @@ const searchMoviesSlice = createSlice({
 });
 
 export const {
+  changeMovieTitle,
   changeMovieFilterValue,
   changeTitleMovies,
   handleGenresListChange,

@@ -1,14 +1,20 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { ROUTES } from "../routes/routeNames";
 
 import { saveUserName, signUpUser } from "../store/signUpSlice";
 
 import { useAppDispatch, useAppSelector } from "./useStoreHooks";
 import useLocalStorage from "./useLocalStorage";
 import useForm from "./useForm";
+import useModal from "./useModal";
 
 const useRegistration = () => {
   const dispatch = useAppDispatch();
-  const { userName } = useAppSelector((state) => state.signUpUser);
+  const navigate = useNavigate();
+
+  const { isAuth, userName } = useAppSelector((state) => state.signUpUser);
 
   const [key, setKey] = useState("");
 
@@ -19,6 +25,7 @@ const useRegistration = () => {
   });
 
   const [user, setUser] = useLocalStorage(key, "");
+  const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
 
   const isUserNameValid = formData.userName.toLowerCase().length > 0;
   const isPasswordValid = formData.password.length > 3;
@@ -58,7 +65,21 @@ const useRegistration = () => {
     dispatch(saveUserName(""));
   };
 
+  const handleGoToRegistration = () => {
+    navigate(ROUTES.SIGNUP_PAGE);
+  };
+
+  const handleModalOpenToRegistration = () => {
+    if (!isAuth) {
+      handleModalOpen();
+    }
+  };
+
   return {
+    isModalOpen,
+    isUserNameValid,
+    isPasswordValid,
+    isPasswordConfirmValid,
     isFormValid,
     user,
     formData,
@@ -67,6 +88,9 @@ const useRegistration = () => {
     handleFormSubmit,
     logOut,
     removeAccount,
+    handleGoToRegistration,
+    handleModalOpenToRegistration,
+    handleModalClose,
   };
 };
 

@@ -10,7 +10,6 @@ import { getRequestErrors } from "../../../utils/getRequestErrors";
 
 import {
   useFavoriteMovies,
-  useModal,
   usePagination,
   useSelect,
   useYearPickerInput,
@@ -21,7 +20,7 @@ import HomePageLayout from "../components/HomePageLayout";
 const HomePageContainer: FC = () => {
   const [isFirstRequest, setIsFirstRequest] = useState(false);
 
-  const { movie, handleGetMovieDetails } = useContext(MovieDetailsContext);
+  const { handleGetMovieDetails } = useContext(MovieDetailsContext);
 
   const {
     moviesGenreValue,
@@ -34,7 +33,6 @@ const HomePageContainer: FC = () => {
     handleSortValueChange,
   } = useSelect();
   const { currentPage, handlePageChange } = usePagination();
-  const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
   const { yearPickerValue, handleYearPickerValueChange } = useYearPickerInput();
 
   const {
@@ -89,7 +87,6 @@ const HomePageContainer: FC = () => {
 
   const searchMovies = movies?.results;
   const totalPages = movies?.total_pages;
-  const movieTitle = movie?.title;
   const genresErrorChange = getRequestErrors(genresError);
 
   const {
@@ -107,14 +104,12 @@ const HomePageContainer: FC = () => {
       isMoviesLoading={isMoviesLoading}
       isMoviesFetching={isMoviesFetching}
       isMoviesError={isMoviesError}
-      isModalOpen={isModalOpen}
       moviesError={moviesError}
       moviesGenreValue={moviesGenreValue}
       totalPages={totalPages ? totalPages : 0}
       genresErrorChange={genresErrorChange ? genresErrorChange : ""}
       yearPickerValue={yearPickerValue ? yearPickerValue : null}
       currentPage={currentPage}
-      movieTitle={movieTitle ? movieTitle : ""}
       moviesList={searchMovies ? searchMovies : []}
       genres={genres ? genres : []}
       handleFormSubmit={handleFormSubmit}
@@ -123,7 +118,6 @@ const HomePageContainer: FC = () => {
       handleRateToChange={handleRateToChange}
       handleSortValueChange={handleSortValueChange}
       handleYearPickerValueChange={handleYearPickerValueChange}
-      handleModalClose={handleModalClose}
       handleAddMovieToFavorite={handleAddMovieToFavorite}
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}

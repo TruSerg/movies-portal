@@ -29,13 +29,16 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
 }) => {
   return (
     <Box className="min-h-screen w-[100%] max-w-[280px] bg-purple-100 p-6 xl:flex xl:min-h-0 xl:max-w-[1470px] xl:flex-col xl:gap-8 xl:pl-[15px] xl:pr-[15px]">
-      <Box className="mb-14 flex flex-col sm:flex-col sm:justify-end  xl:mb-0 xl:flex-row xl:justify-between xl:gap-5">
-        <Box className="mb-14 sm:mb-0 flex items-center gap-2">
+      <Box className="mb-14 flex flex-col xl:mb-0 xl:flex-row xl:justify-between xl:gap-5 sm:flex-col sm:justify-end">
+        <Link
+          to={ROUTES.HOME_PAGE}
+          className="mb-14 flex items-center gap-2 sm:mb-0"
+        >
           <span className="text-[28px] font-semibold text-purple-500 sm:text-[24px]">
             TMDB
           </span>
           <span className="h-6 w-16 rounded-full bg-purple-500 sm:h-5 sm:w-14"></span>
-        </Box>
+        </Link>
 
         <Box className="flex flex-col items-center gap-2 sm:gap-1">
           <Image
@@ -46,19 +49,19 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
 
           {isAuth ? (
             <>
-              <span className="text-xl font-bold sm:text-lg text-purple-500">
+              <span className="text-xl font-bold text-purple-500 sm:text-lg">
                 {userName}
               </span>
-              <Box className="flex items-center gap-2 sm:gap-1">
+              <Box className="flex items-center gap-2">
                 <CustomUnstyledButton
                   handleClick={logOut}
-                  className="whitespace-nowrap p-2 text-base transition-colors hover:text-purple-500 sm:p-1 sm:text-sm"
+                  className="whitespace-nowrap p-2 text-base transition-colors delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
                 >
                   Выйти
                 </CustomUnstyledButton>
                 <CustomUnstyledButton
                   handleClick={removeAccount}
-                  className="whitespace-nowrap p-2 text-base transition-colors hover:text-purple-500 sm:p-1 sm:text-sm"
+                  className="whitespace-nowrap p-2 text-base transition-colors delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
                 >
                   Удалить аккаунт
                 </CustomUnstyledButton>
@@ -70,8 +73,8 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
                 to={ROUTES.SIGNIN_PAGE}
                 className={
                   pathname === ROUTES.SIGNIN_PAGE
-                    ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
-                    : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black hover:text-purple-500 sm:text-sm"
+                    ? "whitespace-nowrap rounded-lg bg-purple-200 p-2 text-sm font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-xs"
+                    : "whitespace-nowrap rounded-lg bg-transparent p-2 text-sm text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-xs"
                 }
               >
                 Войти
@@ -81,8 +84,8 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
                 to={ROUTES.SIGNUP_PAGE}
                 className={
                   pathname === ROUTES.SIGNUP_PAGE
-                    ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
-                    : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
+                    ? "whitespace-nowrap rounded-lg bg-purple-200 p-2 text-sm font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-xs"
+                    : "whitespace-nowrap rounded-lg bg-transparent p-2 text-sm text-black delay-150 ease-in-out hover:text-purple-500 sm:text-xs"
                 }
               >
                 Регистрация
@@ -96,8 +99,8 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
           to={ROUTES.HOME_PAGE}
           className={
             pathname === ROUTES.HOME_PAGE
-              ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
-              : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
+              ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-sm"
+              : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
           }
         >
           По жанрам
@@ -106,8 +109,8 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
           <UnstyledButton
             className={
               pathname === ROUTES.MOVIES_PAGE
-                ? "rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
-                : "rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
+                ? "rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-sm"
+                : "rounded-lg bg-transparent p-[10px] text-base text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
             }
           >
             Фильмы
@@ -117,8 +120,8 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
           to={ROUTES.TRENDING_MOVIES_PAGE}
           className={
             pathname === ROUTES.TRENDING_MOVIES_PAGE
-              ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
-              : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
+              ? "whitespace-nowrap rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-sm"
+              : "whitespace-nowrap rounded-lg bg-transparent p-[10px] text-base text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
           }
         >
           В тренде
@@ -127,8 +130,8 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
           to={ROUTES.FAVORITE_MOVIES_PAGE}
           className={
             pathname === ROUTES.FAVORITE_MOVIES_PAGE
-              ? "rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 sm:p-2 sm:text-sm"
-              : "rounded-lg bg-transparent p-[10px] text-base text-black transition-colors hover:text-purple-500 sm:text-sm"
+              ? "rounded-lg bg-purple-200 p-[10px] text-base font-bold text-purple-500 transition-all delay-150 ease-in-out sm:p-2 sm:text-sm"
+              : "rounded-lg bg-transparent p-[10px] text-base text-black transition-all delay-150 ease-in-out hover:text-purple-500 sm:text-sm"
           }
         >
           Избранное

@@ -9,7 +9,6 @@ import { useAppSelector } from "../../../hooks/useStoreHooks";
 import {
   useDebounce,
   useFavoriteMovies,
-  useModal,
   usePagination,
 } from "../../../hooks";
 
@@ -18,12 +17,11 @@ import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
 
 const SearchMoviesPageContainer = () => {
   const { searchMovieValue } = useAppSelector((state) => state.searchMovies);
-  const { movie, handleGetMovieDetails } = useContext(MovieDetailsContext);
+  const {  handleGetMovieDetails } = useContext(MovieDetailsContext);
 
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
 
   const { currentPage, handlePageChange } = usePagination();
-  const { isModalOpen, handleModalClose, handleModalOpen } = useModal();
   const debouncedSearchMovieInputValue = useDebounce(searchMovieValue);
 
   const [
@@ -40,11 +38,6 @@ const SearchMoviesPageContainer = () => {
   const searchedMoviesList = movies?.results;
   const searchedMoviesQuantity = movies?.total_results;
   const totalPages = movies?.total_pages;
-  const movieTitle = movie?.title;
-
-  console.log("searchedMoviesList: ", searchedMoviesList);
-
-  console.log("movies: ", movies);
 
   const {
     handleAddMovieToFavorite,
@@ -64,11 +57,9 @@ const SearchMoviesPageContainer = () => {
       isMoviesFetching={isMoviesFetching}
       isGenresLoading={isGenresLoading}
       isMoviesError={isMoviesError}
-      isModalOpen={isModalOpen}
       moviesError={moviesError}
       searchedMoviesList={searchedMoviesList ? searchedMoviesList : []}
       totalPages={totalPages ? totalPages : 0}
-      movieTitle={movieTitle ? movieTitle : ""}
       searchedMoviesQuantity={
         searchedMoviesQuantity ? searchedMoviesQuantity : 0
       }
@@ -77,7 +68,6 @@ const SearchMoviesPageContainer = () => {
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
       handlePageChange={handlePageChange}
-      handleModalClose={handleModalClose}
       handleGetMovieDetails={handleGetMovieDetails}
     />
   );

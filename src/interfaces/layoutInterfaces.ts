@@ -20,7 +20,6 @@ export interface HomePageLayoutProps {
   isMoviesLoading: boolean;
   isMoviesFetching: boolean;
   isMoviesError: boolean;
-  isModalOpen: boolean;
   moviesError:
     | ISearchMoviesErrorObject
     | ISearchMoviesDataErrorObject
@@ -31,7 +30,6 @@ export interface HomePageLayoutProps {
   genresErrorChange: string;
   yearPickerValue: DateValue | number;
   currentPage: number;
-  movieTitle: string;
   moviesList: IMovie[];
   genres: IGenre[];
   handleFormSubmit: (e: globalThis.KeyboardEvent) => void;
@@ -40,7 +38,6 @@ export interface HomePageLayoutProps {
   handleRateToChange: (value: string) => void;
   handleSortValueChange: (value: string) => void;
   handleYearPickerValueChange: (value: DateValue) => void;
-  handleModalClose: () => void;
   handleAddMovieToFavorite: (id: number) => void;
   handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
@@ -53,19 +50,16 @@ export interface MoviesPageLayoutProps {
   isMoviesFetching: boolean;
   isMoviesError: boolean;
   isGenresLoading: boolean;
-  isModalOpen: boolean;
   moviesError:
     | ISearchMoviesErrorObject
     | ISearchMoviesDataErrorObject
     | SerializedError
     | undefined;
   moviesFilterValueTitle: string;
-  movieTitle: string;
   moviesList: IMovie[];
   totalPages: number;
   currentPage: number;
   handlePageChange: (page: number) => void;
-  handleModalClose: () => void;
   handleAddMovieToFavorite: (id: number) => void;
   handleRemoveMovieFromFavorite: (id: number) => void;
   isAddMovieToFavorite: (id: number) => boolean;
@@ -77,7 +71,6 @@ export interface TrendingPageLayoutProps {
   isTrendingMoviesFetching: boolean;
   isGenresLoading: boolean;
   isTrendingMoviesError: boolean;
-  isModalOpen: boolean;
   trendingMoviesError:
     | ISearchMoviesErrorObject
     | ISearchMoviesDataErrorObject
@@ -85,11 +78,9 @@ export interface TrendingPageLayoutProps {
     | undefined;
   totalPages: number;
   currentPage: number;
-  movieTitle: string;
   moviesList: IMovie[];
   isAddMovieToFavorite: (id: number) => boolean;
   handlePageChange: (page: number) => void;
-  handleModalClose: () => void;
   handleAddMovieToFavorite: (id: number) => void;
   handleRemoveMovieFromFavorite: (id: number) => void;
   handleGetMovieDetails: (id: number) => void;
@@ -108,7 +99,30 @@ export interface FavoriteMoviesPageLayoutProps {
   handleGetMovieDetails: (id: number) => void;
 }
 
+export interface SearchMoviesPageLayoutProps {
+  isMoviesLoading: boolean;
+  isMoviesFetching: boolean;
+  isGenresLoading: boolean;
+  isMoviesError: boolean;
+  moviesError:
+    | ISearchMoviesErrorObject
+    | ISearchMoviesDataErrorObject
+    | SerializedError
+    | undefined;
+  searchedMoviesList: IMovie[];
+  totalPages: number;
+  searchedMoviesQuantity: number;
+  currentPage: number;
+  isAddMovieToFavorite: (id: number) => boolean;
+  handlePageChange: (page: number) => void;
+  handleAddMovieToFavorite: (id: number) => void;
+  handleRemoveMovieFromFavorite: (id: number) => void;
+  handleGetMovieDetails: (id: number) => void;
+}
+
 export interface MovieDetailsPageLayoutProps {
+  isAuth: boolean;
+  isModalOpen: boolean;
   isMovieLoading: boolean;
   isMovieFetching: boolean;
   isMovieError: boolean;
@@ -135,4 +149,7 @@ export interface MovieDetailsPageLayoutProps {
   movieProduction: IProductionCompany[];
   handleRemoveMovie: (id: number) => void;
   handleAddMovie: (newMovie: IMovie) => void;
+  handleGoToRegistration: () => void;
+  handleModalOpenToRegistration: () => void;
+  handleModalClose: () => void;
 }

@@ -1,6 +1,4 @@
-import {
-  IMovie,
-} from "../interfaces/searchMoviesDataInterfaces";
+import { IMovie } from "../interfaces/searchMoviesDataInterfaces";
 
 import useLocalStorage from "./useLocalStorage";
 

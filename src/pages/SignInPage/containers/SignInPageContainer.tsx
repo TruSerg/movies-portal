@@ -13,7 +13,14 @@ const SignInPageContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { formData, handleFormFieldChange, handleFormReset } = useForm({
+  const {
+    isFocus,
+    formData,
+    handleFormFieldChange,
+    handleFormReset,
+    checkInputFormBlur,
+    checkInputFormFocus,
+  } = useForm({
     userName: "",
     password: "",
   });
@@ -52,10 +59,15 @@ const SignInPageContainer = () => {
 
   return (
     <SignInPageLayout
+      isFocus={isFocus}
       isFormValid={isFormValid}
+      isUserNameValid={isUserNameValid}
+      isPasswordValid={isPasswordValid}
       formData={formData}
       handleFormFieldChange={handleFormFieldChange}
       handleFormSubmit={handleFormSubmit}
+      checkInputFormBlur={checkInputFormBlur}
+      checkInputFormFocus={checkInputFormFocus}
     />
   );
 };
