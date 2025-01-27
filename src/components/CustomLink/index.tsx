@@ -8,7 +8,6 @@ interface CustomLinkProps {
   text?: string;
   children?: ReactNode;
   className: string;
-  handleClick?: () => void;
 }
 
 const CustomLink: FC<CustomLinkProps> = ({
@@ -16,13 +15,12 @@ const CustomLink: FC<CustomLinkProps> = ({
   text,
   children,
   className,
-  handleClick,
 }) => {
   const navigate = useNavigate();
 
   return (
     <CustomUnstyledButton
-      handleClick={() => navigate(href) ?? handleClick}
+      handleClick={() => navigate(href)}
       className={className}
     >
       {text ?? children}

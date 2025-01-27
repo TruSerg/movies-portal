@@ -53,6 +53,7 @@ const MoviesCard: FC<CustomCardProps> = ({
 
   const { genresList, replaceGenreIdToGenreString } = useReplaceGenreId();
   const { isScreenLg } = useResize();
+
   const {
     isModalOpen,
     handleModalOpenToRegistration,
@@ -176,7 +177,7 @@ const MoviesCard: FC<CustomCardProps> = ({
       >
         <Box className="border-gray border-t pt-3">
           <Heading
-            text={`Чтобы добавить фильм в избранное или удалить, необходимо авторизоваться!`}
+            text="Чтобы добавить фильм в избранное или удалить, необходимо авторизоваться!"
             className="mb-4 text-[18px] font-bold lg:text-[16px] sm:mb-3 sm:text-[14px]"
           />
         </Box>

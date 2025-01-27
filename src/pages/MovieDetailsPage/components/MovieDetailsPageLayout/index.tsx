@@ -324,7 +324,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
       >
         <Box className="border-gray border-t pt-3">
           <Heading
-            text={`Чтобы добавить фильм в избранное или удалить, нужно авторизоваться!`}
+            text="Чтобы добавить фильм в избранное или удалить, необходимо авторизоваться!"
             className="mb-4 text-[18px] font-bold lg:text-[16px] sm:mb-3 sm:text-[14px]"
           />
         </Box>

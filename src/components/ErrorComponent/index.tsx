@@ -11,16 +11,17 @@ import CustomLink from "../CustomLink";
 
 interface ErrorComponentProps {
   error: string;
+  errorCode?: string;
 }
 
-const ErrorComponent: FC<ErrorComponentProps> = ({ error }) => {
+const ErrorComponent: FC<ErrorComponentProps> = ({ error, errorCode }) => {
   const { pathname } = useLocation();
 
   return (
     <Box className="flex min-h-[80vh] flex-col items-center justify-center">
       <Image src={ErrorImage} width="656" height="51" alt="Error" />
       <Box className="text-7xl md:text-6xl sm:text-5xl">
-        <span className="font-vt323">ERROR</span>
+        <span className="font-vt323">ERROR {errorCode}</span>
       </Box>
 
       <Image src={ErrorImage} width="656" height="51" alt="Error" />
@@ -32,7 +33,7 @@ const ErrorComponent: FC<ErrorComponentProps> = ({ error }) => {
           text={`${error!}`}
         />
 
-        {pathname !== "/" ? (
+        {pathname !== ROUTES.HOME_PAGE ? (
           <CustomLink
             className="whitespace-nowrap rounded-lg bg-purple-500 p-[10px] text-base font-bold text-white transition delay-150 ease-in-out hover:bg-purple-600 sm:p-2 sm:text-sm"
             href={ROUTES.HOME_PAGE}

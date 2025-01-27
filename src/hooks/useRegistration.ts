@@ -16,6 +16,7 @@ const useRegistration = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [key, setKey] = useState("");
+  const [user, setUser] = useLocalStorage(key, "");
 
   const { isAuth, userName } = useAppSelector((state) => state.signUpUser);
 
@@ -25,7 +26,6 @@ const useRegistration = () => {
     passwordConfirm: "",
   });
 
-  const [user, setUser] = useLocalStorage(key, "");
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
 
   const isUserNameValid = formData.userName.toLowerCase().length > 0;

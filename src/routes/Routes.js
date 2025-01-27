@@ -10,6 +10,7 @@ import MovieDetailsPageContainer from "../pages/MovieDetailsPage/containers/Movi
 import SearchMoviesPageContainer from "../pages/SearchMoviePage/containers/SearchMoviesPageContainer";
 import SignupPageContainer from "../pages/SignUpPage/containers/SignUpPageContainer";
 import SignInPageContainer from "../pages/SignInPage/containers/SignInPageContainer";
+import PageNotFound from "../pages/PageNotFound";
 
 const AppRoutes = () => {
   return (
@@ -36,7 +37,7 @@ const AppRoutes = () => {
 
       <Route path={ROUTES.SIGNIN_PAGE} element={<SignInPageContainer />} />
 
-      <Route path="*" element={<Navigate to={ROUTES.HOME_PAGE} />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

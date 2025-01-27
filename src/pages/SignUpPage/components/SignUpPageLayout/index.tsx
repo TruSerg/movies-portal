@@ -1,5 +1,6 @@
 import { ChangeEvent, FC } from "react";
 import { Link } from "react-router-dom";
+import { Box } from "@mantine/core";
 
 import { ROUTES } from "../../../../routes/routeNames";
 
@@ -11,7 +12,6 @@ import FormInput from "../../../../components/Inputs/FormInputs/InputText";
 import Heading from "../../../../components/Heading";
 import InputPassword from "../../../../components/Inputs/FormInputs/InputPassword";
 import CustomModal from "../../../../components/Modal";
-import { Box } from "@mantine/core";
 import CustomUnstyledButton from "../../../../components/Buttons/UnstyledButton";
 
 interface SignUpPageLayoutProps {
@@ -140,7 +140,7 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
       >
         <Box className="border-gray border-t pt-3">
           <Heading
-            text={`Вы успешно авторизовались!`}
+            text="Вы успешно авторизовались!"
             className="mb-4 text-[18px] font-bold lg:text-[16px] sm:mb-3 sm:text-[14px]"
           />
         </Box>
