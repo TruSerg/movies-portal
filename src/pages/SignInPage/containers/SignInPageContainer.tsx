@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../../../routes/routeNames";
 
-import { saveUserName, signUpUser } from "../../../store/signUpSlice";
+import {
+  changeErrorMessage,
+  saveUserName,
+  signUpUser,
+} from "../../../store/signUpSlice";
 
 import { useForm, useVisible } from "../../../hooks";
-import { useAppDispatch } from "../../../hooks/useStoreHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 
 import SignInPageLayout from "../components/SignInPageLayout";
 
@@ -14,9 +18,9 @@ const SignInPageContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const { errorMessage } = useAppSelector((state) => state.signUpUser);
 
-  const { isVisible } = useVisible(errorMessage);
+  const { isVisible, handleVisible, handleHidden } = useVisible();
   const {
     isFocus,
     formData,
@@ -55,13 +59,27 @@ const SignInPageContainer = () => {
 
           navigate(ROUTES.HOME_PAGE);
         } else {
-          setErrorMessage("Неправильно введён пароль!");
+          dispatch(changeErrorMessage("Неправильно введён пароль!"));
         }
       } else {
-        setErrorMessage("Пользователь с таким именем не найден!");
+        dispatch(changeErrorMessage("Пользователь с таким именем не найден!"));
       }
     }
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      handleVisible();
+    }
+
+    const errorBlockVisibleTimeout = setTimeout(() => {
+      dispatch(changeErrorMessage(""));
+
+      handleHidden();
+    }, 5000);
+
+    return () => clearTimeout(errorBlockVisibleTimeout);
+  }, [dispatch, errorMessage]);
 
   return (
     <SignInPageLayout

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../routes/routeNames";
 
-import { saveUserName, signUpUser } from "../store/signUpSlice";
+import { changeErrorMessage, saveUserName, signUpUser } from "../store/signUpSlice";
 
 import { useAppDispatch, useAppSelector } from "./useStoreHooks";
 import useLocalStorage from "./useLocalStorage";
@@ -14,7 +14,6 @@ const useRegistration = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [errorMessage, setErrorMessage] = useState("");
   const [key, setKey] = useState("");
   const [user, setUser] = useLocalStorage(key, "");
 
@@ -50,7 +49,7 @@ const useRegistration = () => {
 
           handleModalOpen();
         } else {
-          setErrorMessage("У вас уже есть аккаунт!");
+          dispatch(changeErrorMessage("У вас уже есть аккаунт!"));
 
           handleFormReset();
         }
@@ -89,7 +88,6 @@ const useRegistration = () => {
     isPasswordValid,
     isPasswordConfirmValid,
     isFormValid,
-    errorMessage,
     user,
     formData,
     handleFormFieldChange,

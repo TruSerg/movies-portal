@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useState } from "react";
 
-const useVisible = (value: ReactNode) => {
+const useVisible = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleVisible = () => {
@@ -10,18 +10,6 @@ const useVisible = (value: ReactNode) => {
   const handleHidden = () => {
     setIsVisible(false);
   };
-
-  useEffect(() => {
-    if (value) {
-      handleVisible();
-    }
-
-    const errorBlockVisibleTimeout = setTimeout(() => {
-      handleHidden();
-    }, 5000);
-
-    return () => clearTimeout(errorBlockVisibleTimeout);
-  }, [value]);
 
   return { isVisible, handleVisible, handleHidden };
 };

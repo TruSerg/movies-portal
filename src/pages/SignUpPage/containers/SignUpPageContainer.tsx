@@ -1,15 +1,23 @@
+import { useEffect } from "react";
+
+import { changeErrorMessage } from "../../../store/signUpSlice";
+
 import { useForm, useRegistration, useVisible } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/useStoreHooks";
 
 import SignUpPageLayout from "../components/SignUpPageLayout";
 
 const SignUpPageContainer = () => {
+  const dispatch = useAppDispatch();
+
+  const { errorMessage } = useAppSelector((state) => state.signUpUser);
+
   const {
     isFormValid,
     isUserNameValid,
     isPasswordValid,
     isPasswordConfirmValid,
     isModalOpen,
-    errorMessage,
     formData,
     handleFormFieldChange,
     handleFormSubmit,
@@ -17,8 +25,22 @@ const SignUpPageContainer = () => {
     handleGoToSignIn,
   } = useRegistration();
 
+  const { isVisible, handleVisible, handleHidden } = useVisible();
   const { isFocus, checkInputFormBlur, checkInputFormFocus } = useForm(null);
-  const { isVisible } = useVisible(errorMessage);
+
+  useEffect(() => {
+    if (errorMessage) {
+      handleVisible();
+    }
+
+    const errorBlockVisibleTimeout = setTimeout(() => {
+      dispatch(changeErrorMessage(""));
+
+      handleHidden();
+    }, 5000);
+
+    return () => clearTimeout(errorBlockVisibleTimeout);
+  }, [dispatch, errorMessage]);
 
   return (
     <SignUpPageLayout

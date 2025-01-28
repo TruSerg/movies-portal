@@ -42,13 +42,13 @@ const SignInPageLayout: FC<SignInPageLayoutProps> = ({
       <CustomForm
         id="SignUpForm"
         handleSubmit={handleFormSubmit}
-        className="mb-2 flex w-full max-w-[450px] flex-col justify-center gap-5 rounded-md border border-solid border-purple-300 p-5 lg:gap-4 sm:p-3"
+        className="mb-2 flex w-full max-w-[450px] flex-col justify-center gap-5 rounded-md border border-solid border-purple-300 p-5 sm:p-3"
       >
         <Heading
           text="Вход"
           className="mb-4 text-center text-[28px] font-bold lg:mb-3 lg:text-[24px] sm:mb-2 sm:text-[22px]"
         />
-        
+
         {isVisible && <span className="text-red-500">{errorMessage}</span>}
 
         <FormInput
@@ -86,7 +86,7 @@ const SignInPageLayout: FC<SignInPageLayoutProps> = ({
           variant="outline"
           radius="md"
           disabled={!isFormValid}
-          className="h-10 w-full transition delay-150 ease-in-out lg:h-8 sm:h-7 sm:text-sm"
+          className="h-10 w-full transition delay-150 ease-in-out sm:h-9 sm:text-sm"
         >
           Войти
         </CustomButton>

@@ -16,12 +16,12 @@ const YearPickerComponent: FC<YearPickerComponentProps> = ({
   placeholder,
   handleChange,
 }) => {
-  const { isScreenSm, isScreenLg } = useResize();
+  const { isScreenSm } = useResize();
 
   return (
     <YearPickerInput
       clearable
-      size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
+      size={isScreenSm ? "sm" : "md"}
       radius="md"
       minDate={new Date("01.01.1895")}
       maxDate={new Date()}

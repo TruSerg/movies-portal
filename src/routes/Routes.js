@@ -1,16 +1,40 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { lazy } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import { ROUTES } from "./routeNames";
 
-import HomePageContainer from "../pages/HomePage/containers/HomePageContainer";
-import MoviesPageContainer from "../pages/MoviesPage/containers/MoviesPageContainer";
-import TrendingMoviesPageContainer from "../pages/TrendingMoviesPage/containers/TrendingMoviesPageContainer";
-import FavoriteMoviesPageContainer from "../pages/FavoriteMoviesPage/containers/FavoriteMoviesPageContainer";
-import MovieDetailsPageContainer from "../pages/MovieDetailsPage/containers/MovieDetailsPageContainer";
-import SearchMoviesPageContainer from "../pages/SearchMoviePage/containers/SearchMoviesPageContainer";
-import SignupPageContainer from "../pages/SignUpPage/containers/SignUpPageContainer";
-import SignInPageContainer from "../pages/SignInPage/containers/SignInPageContainer";
-import PageNotFound from "../pages/PageNotFound";
+const HomePageContainer = lazy(
+  () => import("../pages/HomePage/containers/HomePageContainer"),
+); 
+const MoviesPageContainer = lazy(
+  () => import("../pages/MoviesPage/containers/MoviesPageContainer"),
+);
+const TrendingMoviesPageContainer = lazy(
+  () =>
+    import(
+      "../pages/TrendingMoviesPage/containers/TrendingMoviesPageContainer"
+    ),
+);
+const FavoriteMoviesPageContainer = lazy(
+  () =>
+    import(
+      "../pages/FavoriteMoviesPage/containers/FavoriteMoviesPageContainer"
+    ),
+);
+const MovieDetailsPageContainer = lazy(
+  () =>
+    import("../pages/MovieDetailsPage/containers/MovieDetailsPageContainer"),
+);
+const SearchMoviesPageContainer = lazy(
+  () => import("../pages/SearchMoviePage/containers/SearchMoviesPageContainer"),
+);
+const SignupPageContainer = lazy(
+  () => import("../pages/SignUpPage/containers/SignUpPageContainer"),
+);
+const SignInPageContainer = lazy(
+  () => import("../pages/SignInPage/containers/SignInPageContainer"),
+);
+const PageNotFound = lazy(() => import("../pages/PageNotFound"));
 
 const AppRoutes = () => {
   return (

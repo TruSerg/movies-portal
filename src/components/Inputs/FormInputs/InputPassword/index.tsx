@@ -26,7 +26,7 @@ const InputPassword: FC<FormInputProps> = ({
   handleBlur,
   handleFocus,
 }) => {
-  const { isScreenSm, isScreenLg } = useResize();
+  const { isScreenSm } = useResize();
 
   return (
     <PasswordInput
@@ -34,7 +34,7 @@ const InputPassword: FC<FormInputProps> = ({
       value={value}
       name={name}
       radius="md"
-      size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
+      size={isScreenSm ? "sm" : "md"}
       type={type}
       error={error}
       placeholder={placeholder}

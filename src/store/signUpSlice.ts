@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 interface signUpUserState {
   isAuth: boolean;
   userName: string;
+  errorMessage: string;
 }
 
 const initialState: signUpUserState = {
   isAuth: false,
   userName: "",
+  errorMessage: "",
 };
 
 const signUpUserSlice = createSlice({
@@ -20,9 +22,13 @@ const signUpUserSlice = createSlice({
     saveUserName(state, { payload }) {
       state.userName = payload;
     },
+    changeErrorMessage(state, { payload }) {
+      state.errorMessage = payload;
+    },
   },
 });
 
-export const { signUpUser, saveUserName } = signUpUserSlice.actions;
+export const { signUpUser, saveUserName, changeErrorMessage } =
+  signUpUserSlice.actions;
 
 export default signUpUserSlice.reducer;

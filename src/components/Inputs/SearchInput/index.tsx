@@ -16,12 +16,12 @@ const BasicInput: FC<BasicInputProps> = ({
   placeholder,
   handleChange,
 }) => {
-  const { isScreenSm, isScreenLg } = useResize();
+  const { isScreenSm } = useResize();
 
   return (
     <Input
       className={className}
-      size={isScreenSm ? "xs" : "sm" ? (isScreenLg ? "sm" : "md") : "md"}
+      size={isScreenSm ? "sm" : "md"}
       radius="md"
       rightSection={<IconSearch size={14} stroke={1.5} />}
       value={searchValue}
