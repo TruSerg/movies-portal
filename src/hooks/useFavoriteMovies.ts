@@ -17,11 +17,15 @@ const useFavoriteMovies = (moviesList: IMovie[]) => {
   };
 
   const handleAddMovieFromDetailsToFavorite = (movieDetails: IMovie) => {
-    favoriteMovies.forEach((movie: IMovie) => {
-      if (movie.id !== movieDetails.id) {
-        setFavoriteMovies([...favoriteMovies, movieDetails]);
-      }
-    });
+    if (favoriteMovies.length !== 0) {
+      favoriteMovies.forEach((movie: IMovie) => {
+        if (movie.id !== movieDetails.id) {
+          setFavoriteMovies([...favoriteMovies, movieDetails]);
+        }
+      });
+    } else {
+      setFavoriteMovies([movieDetails]);
+    }
   };
 
   const handleRemoveMovieFromFavorite = (id: number) => {
@@ -31,7 +35,7 @@ const useFavoriteMovies = (moviesList: IMovie[]) => {
   };
 
   const isAddMovieToFavorite = (id: number) => {
-    return favoriteMovies?.findIndex((movie: IMovie) => movie.id === id) !== -1;
+    return favoriteMovies.findIndex((movie: IMovie) => movie.id === id) !== -1;
   };
 
   return {

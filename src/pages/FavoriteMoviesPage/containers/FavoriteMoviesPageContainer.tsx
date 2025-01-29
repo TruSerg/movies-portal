@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
 
 import { useGetMovieGenresQuery } from "../../../store/movies.api";
-import { handleMoviesListChange } from "../../../store/searchMoviesSlice";
+import { handleMoviesListChange } from "../../../store/favoriteMoviesSlice";
+
 import { MovieDetailsContext } from "../../../context/MovieDetailsContext";
 
 import { useFavoriteMovies, usePagination } from "../../../hooks";
@@ -12,14 +13,17 @@ import FavoriteMoviesPageLayout from "../components/FavoriteMoviesPageLayout";
 const FavoriteMoviesPageContainer = () => {
   const dispatch = useAppDispatch();
 
-  const { moviesList } = useAppSelector((state) => state.searchMovies);
+  const { favoriteMoviesList } = useAppSelector(
+    (state) => state.favoriteMovies,
+  );
+
   const { handleGetMovieDetails } = useContext(MovieDetailsContext);
 
   const {
     favoriteMovies,
     handleRemoveMovieFromFavorite,
     isAddMovieToFavorite,
-  } = useFavoriteMovies(moviesList);
+  } = useFavoriteMovies(favoriteMoviesList);
 
   const {
     slicedMoviesList,
@@ -27,7 +31,7 @@ const FavoriteMoviesPageContainer = () => {
     currentPage,
     totalPages,
     handlePageChange,
-  } = usePagination(moviesList);
+  } = usePagination(favoriteMoviesList);
 
   const { isLoading: isGenresLoading } = useGetMovieGenresQuery();
 
@@ -41,7 +45,7 @@ const FavoriteMoviesPageContainer = () => {
       isGenresLoading={isGenresLoading}
       totalPages={totalPages}
       currentPage={currentPage}
-      favoriteMovies={favoriteMovies}
+      favoriteMovies={favoriteMoviesList}
       slicedMoviesList={slicedMoviesList}
       handleRemoveMovieFromFavorite={handleRemoveMovieFromFavorite}
       isAddMovieToFavorite={isAddMovieToFavorite}
