@@ -36,10 +36,6 @@ const SideBar = () => {
 
       navigate(ROUTES.SEARCH_MOVIES_PAGE);
     }
-
-    if (debouncedSearchMovieInputValue === "bomb") {
-      throw new Error("Error");
-    }
   }, [currentPage, searchMoviesByTitle, debouncedSearchMovieInputValue]);
 
   useEffect(() => {

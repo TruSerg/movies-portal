@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 import { Image } from "@mantine/core";
 import { Box, Card, Text } from "@mantine/core";
 
@@ -19,6 +20,7 @@ import NoImageBig from "../NoImage/NoImageBig";
 import CustomUnstyledButton from "../Buttons/UnstyledButton";
 import RateComponent from "../RateComponent";
 import CustomModal from "../Modal";
+import ErrorFallback from "../ErrorFallback";
 
 interface CustomCardProps {
   date: string;
@@ -66,7 +68,7 @@ const MoviesCard: FC<CustomCardProps> = ({
   }, [genres, replaceGenreIdToGenreString, list]);
 
   return (
-    <>
+    <ErrorBoundary fallback={<ErrorFallback />}>
       <Card
         radius="md"
         shadow="sm"
@@ -169,7 +171,6 @@ const MoviesCard: FC<CustomCardProps> = ({
           </Box>
         </Link>
       </Card>
-
       <CustomModal
         opened={isModalOpen}
         handleClose={handleModalClose}
@@ -189,7 +190,7 @@ const MoviesCard: FC<CustomCardProps> = ({
           Приступить к регистрации
         </CustomUnstyledButton>
       </CustomModal>
-    </>
+    </ErrorBoundary>
   );
 };
 

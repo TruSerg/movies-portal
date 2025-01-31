@@ -5,6 +5,8 @@ import searchMoviesReducer from "./searchMoviesSlice";
 import signUpUserReducer from "./signUpSlice";
 import favoritesMoviesReducer from "./favoriteMoviesSlice";
 
+import { logger } from "../middleware/logger";
+
 export const store = configureStore({
   reducer: {
     [moviesApi.reducerPath]: moviesApi.reducer,
@@ -13,7 +15,7 @@ export const store = configureStore({
     favoriteMovies: favoritesMoviesReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(moviesApi.middleware),
+    getDefaultMiddleware().concat(moviesApi.middleware).concat(logger),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

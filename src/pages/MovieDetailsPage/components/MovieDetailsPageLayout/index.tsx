@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Box, Image, Text } from "@mantine/core";
 
 import { MovieDetailsPageLayoutProps } from "../../../../interfaces/layoutInterfaces";
@@ -13,11 +14,12 @@ import Heading from "../../../../components/Heading";
 import DateComponent from "../../../../components/DateComponent";
 import RateComponent from "../../../../components/RateComponent";
 import PopularityComponent from "../../../../components/PopularityComponent";
-import NoImageBig from "../../../../components/NoImage/NoImageBig";
 import CustomUnstyledButton from "../../../../components/Buttons/UnstyledButton";
 import CustomLoader from "../../../../components/Loaders/Loader";
 import ErrorComponent from "../../../../components/ErrorComponent";
 import CustomModal from "../../../../components/Modal";
+import ErrorFallback from "../../../../components/ErrorFallback";
+import NoImageBg from "../../../../components/NoImage/NoImageBg";
 
 const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
   isAuth,
@@ -49,7 +51,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
   handleModalClose,
 }) => {
   return (
-    <>
+    <ErrorBoundary fallback={<ErrorFallback />}>
       <main className="m-[0_auto] w-full max-w-[1010px] pb-10 pl-[15px] pr-[15px] pt-10 xl:m-0 xl:max-w-full xl:pb-5 xl:pt-5">
         <Box className="relative mb-6 min-h-[80vh]">
           {isMovieLoading || isMovieFetching ? (
@@ -75,7 +77,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
                               alt={title}
                             />
                           ) : (
-                            <NoImageBig />
+                            <NoImageBg />
                           )}
 
                           <Box className="break-word flex flex-col gap-3">
@@ -336,7 +338,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
           Приступить к регистрации
         </CustomUnstyledButton>
       </CustomModal>
-    </>
+    </ErrorBoundary>
   );
 };
 
