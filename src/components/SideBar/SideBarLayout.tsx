@@ -29,7 +29,7 @@ const SideBarLayout: FC<SideBarLayoutProps> = ({
   removeAccount,
 }) => {
   return (
-    <Box className="min-h-screen w-[100%] max-w-[280px] bg-purple-100 p-6 dark:bg-[#45315a] xl:flex xl:min-h-0 xl:max-w-[1470px] xl:flex-col xl:gap-8 xl:pl-[15px] xl:pr-[15px]">
+    <Box className="min-h-screen w-[100%] max-w-[280px] bg-purple-100 p-6 dark:bg-[#483a57] xl:flex xl:min-h-0 xl:max-w-[1470px] xl:flex-col xl:gap-8 xl:pl-[15px] xl:pr-[15px]">
       <Box className="mb-14 flex flex-col xl:mb-0 xl:flex-row xl:justify-between xl:gap-5">
         <Link
           to={ROUTES.HOME_PAGE}
