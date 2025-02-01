@@ -13,15 +13,12 @@ const FavoriteMoviesEmptyArea = () => (
         src={FavoriteEmptyAreaImage}
         alt="Empty area image"
       />
-      <Text
-        c="dimmed"
-        className="mb-4 text-center text-2xl font-bold lg:text-xl sm:text-lg"
-      >
+      <Text className="mb-4 text-center text-2xl font-bold text-gray-500 dark:text-gray-300 lg:text-xl sm:text-lg">
         Вы еще не добавили ни одного фильма!
       </Text>
 
       <CustomLink
-        className="whitespace-nowrap rounded-lg bg-purple-500 p-[10px] text-base font-bold text-white transition delay-150 ease-in-out hover:bg-purple-600 sm:p-2 sm:text-sm"
+        className="whitespace-nowrap rounded-lg bg-purple-500 p-[10px] text-base font-bold text-white transition delay-150 ease-in-out hover:bg-purple-600 dark:bg-purple-600 dark:text-gray-300 dark:hover:bg-purple-700 sm:p-2 sm:text-sm"
         href={ROUTES.HOME_PAGE}
         text="На главную"
       />

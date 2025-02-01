@@ -66,7 +66,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
                     />
                   ) : (
                     <>
-                      <Box className="mb-5 min-h-[400px] rounded-xl bg-white p-6 md:p-3">
+                      <Box className="mb-5 min-h-[400px] rounded-xl bg-white p-6 dark:bg-zinc-800 md:p-3">
                         <Box className="flex flex-1 flex-col">
                           {image ? (
                             <Image
@@ -164,7 +164,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
                                   </Text>
                                   <DateComponent
                                     c="#000"
-                                    className="text-md leading-tight lg:text-sm sm:text-xs"
+                                    className="text-md leading-tight dark:!text-gray-300 lg:text-sm sm:text-xs"
                                     date={date}
                                     dateFormat="MMMM D, YYYY"
                                   />
@@ -229,7 +229,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
 
                       {isShowDetailsBlock && (
                         <>
-                          <Box className="rounded-xl bg-white p-6 sm:p-3">
+                          <Box className="rounded-xl bg-white p-6 dark:bg-zinc-800 sm:p-3">
                             {movieTrailerId && (
                               <Box className="border-b-solid border-b-#D5D6DC mb-5 border-b-[1px] pb-5">
                                 <Heading

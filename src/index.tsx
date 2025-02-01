@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { MantineProvider } from "@mantine/core";
 
 import { MovieDetailsProvider } from "./context/MovieDetailsContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 import AppRoutes from "./routes/Routes";
 
@@ -21,13 +22,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <MovieDetailsProvider>
-        <MantineProvider>
-          <MainLayout>
-            <AppRoutes />
-          </MainLayout>
-        </MantineProvider>
-      </MovieDetailsProvider>
+      <MantineProvider>
+        <ThemeProvider>
+          <MovieDetailsProvider>
+            <MainLayout>
+              <AppRoutes />
+            </MainLayout>
+          </MovieDetailsProvider>
+        </ThemeProvider>
+      </MantineProvider>
     </Provider>
   </BrowserRouter>,
 );

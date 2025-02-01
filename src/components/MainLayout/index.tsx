@@ -1,6 +1,5 @@
 import { ReactNode, FC, Suspense } from "react";
 import { withErrorBoundary } from "react-error-boundary";
-
 import { Box } from "@mantine/core";
 
 import SideBar from "../SideBar/SideBar";
@@ -15,7 +14,7 @@ interface MainLayoutProps {
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   return (
     <Container>
-      <Box className="flex bg-gray-100 font-inter xl:flex-col">
+      <Box className="flex bg-gray-100 font-inter dark:bg-neutral-700 xl:flex-col">
         <SideBar />
 
         <Suspense
@@ -34,8 +33,4 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 
 export default withErrorBoundary(MainLayout, {
   fallback: <ErrorBoundaryPage />,
-  onError(error, info) {
-    // Do something with the error
-    // E.g. log to an error logging client here
-  },
 });

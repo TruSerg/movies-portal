@@ -124,11 +124,9 @@ const HomePageLayout: FC<HomePageLayoutProps> = ({
           variant="outline"
           radius="md"
           disabled={moviesGenreValue ? false : true}
-          className="flex w-full max-w-[100px] items-center justify-end justify-center transition delay-150 ease-in-out lg:h-8 sm:h-7 sm:max-w-[70px] sm:text-sm"
+          className="flex w-full max-w-[100px] items-center justify-center bg-white transition delay-150 ease-in-out dark:bg-[#2e2e2e] dark:hover:dark:bg-[#383838] lg:h-8 sm:h-7 sm:max-w-[70px] sm:text-sm"
         >
-          {moviesGenreValue ? (
-            <IconSearch className="h-5 w-5 lg:h-4 lg:w-4 sm:h-3 sm:w-3" />
-          ) : null}
+          <IconSearch className="h-5 w-5 lg:h-4 lg:w-4 sm:h-3 sm:w-3" />
         </CustomButton>
       </Box>
 

@@ -4,6 +4,7 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: ["class", '[data-mantine-color-scheme="dark"]'],
   theme: {
     screens: {
       "2xl": { max: "1320px" },

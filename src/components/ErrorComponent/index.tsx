@@ -29,13 +29,13 @@ const ErrorComponent: FC<ErrorComponentProps> = ({ error, errorCode }) => {
       <Box className="w-full max-w-[656px] p-5 text-center lg:p-4 sm:p-2">
         <Heading
           tag="h2"
-          className="mb-4 text-xl font-semibold text-black sm:text-lg"
+          className="mb-4 text-xl font-semibold text-black dark:text-gray-300 sm:text-lg"
           text={`${error!}`}
         />
 
         {pathname !== ROUTES.HOME_PAGE ? (
           <CustomLink
-            className="whitespace-nowrap rounded-lg bg-purple-500 p-[10px] text-base font-bold text-white transition delay-150 ease-in-out hover:bg-purple-600 sm:p-2 sm:text-sm"
+            className="whitespace-nowrap rounded-lg bg-purple-500 p-[10px] text-base font-bold text-white transition delay-150 ease-in-out hover:bg-purple-600 dark:bg-purple-600 dark:text-gray-300 dark:hover:bg-purple-700 sm:p-2 sm:text-sm"
             href={ROUTES.HOME_PAGE}
             text="На главную"
           />

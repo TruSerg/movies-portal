@@ -9,10 +9,7 @@ const StartSearchingComponent = () => (
       src={StartSearchingImage}
       alt="Start searching image"
     />
-    <Text
-      c="dimmed"
-      className="text-center text-2xl font-bold lg:text-xl sm:text-lg"
-    >
+    <Text className="text-center text-2xl font-bold text-gray-500 dark:text-gray-300 lg:text-xl sm:text-lg">
       Начните поиск фильмов!
     </Text>
   </Box>

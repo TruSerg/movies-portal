@@ -8,7 +8,6 @@ import {
 import { BASE_URL, TOKEN } from "../const";
 import {
   IGenre,
-  IMovie,
   IMovieDetails,
   IVideoResponse,
   MoviesSearchParams,
