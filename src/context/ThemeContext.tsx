@@ -40,7 +40,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, [setColorScheme]);
 
   useEffect(() => {
-    detectDarkMode();
+    setColorScheme(detectDarkMode());
   }, []);
 
   return (

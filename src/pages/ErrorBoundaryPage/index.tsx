@@ -6,7 +6,7 @@ import Heading from "../../components/Heading";
 
 const ErrorBoundaryPage = () => {
   return (
-    <main className="flex min-h-screen w-full items-center justify-center bg-gray-100 pl-[15px] pr-[15px]">
+    <main className="flex min-h-screen w-full items-center justify-center bg-gray-100 pl-[15px] pr-[15px] dark:bg-neutral-700">
       <Box className="flex flex-col gap-5 sm:gap-3">
         <LoadingPagesComponent errorText="ERROR" />
 
