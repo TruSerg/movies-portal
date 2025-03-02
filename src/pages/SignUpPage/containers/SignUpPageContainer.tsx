@@ -26,7 +26,14 @@ const SignUpPageContainer = () => {
   } = useRegistration();
 
   const { isVisible, handleVisible, handleHidden } = useVisible();
-  const { isFocus, checkInputFormBlur, checkInputFormFocus } = useForm(null);
+  const {
+    isInputNameFocus,
+    isInputPasswordFocus,
+    isInputConfirmPasswordFocus,
+    checkInputNameBlur,
+    checkInputPasswordBlur,
+    checkInputConfirmPasswordBlur,
+  } = useForm(null);
 
   useEffect(() => {
     if (errorMessage) {
@@ -44,21 +51,24 @@ const SignUpPageContainer = () => {
 
   return (
     <SignUpPageLayout
-      isModalOpen={isModalOpen}
-      isFocus={isFocus}
       isVisible={isVisible}
       isFormValid={isFormValid}
       isUserNameValid={isUserNameValid}
       isPasswordValid={isPasswordValid}
       isPasswordConfirmValid={isPasswordConfirmValid}
+      isModalOpen={isModalOpen}
       errorMessage={errorMessage}
       formData={formData}
+      isInputNameFocus={isInputNameFocus}
+      isInputPasswordFocus={isInputPasswordFocus}
+      isInputConfirmPasswordFocus={isInputConfirmPasswordFocus}
       handleFormFieldChange={handleFormFieldChange}
       handleFormSubmit={handleFormSubmit}
-      checkInputFormBlur={checkInputFormBlur}
-      checkInputFormFocus={checkInputFormFocus}
       handleModalClose={handleModalClose}
       handleGoToSignIn={handleGoToSignIn}
+      checkInputNameBlur={checkInputNameBlur}
+      checkInputPasswordBlur={checkInputPasswordBlur}
+      checkInputConfirmPasswordBlur={checkInputConfirmPasswordBlur}
     />
   );
 };

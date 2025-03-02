@@ -12,7 +12,6 @@ interface FormInputProps {
   placeholder: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleBlur: () => void;
-  handleFocus: () => void;
 }
 
 const InputPassword: FC<FormInputProps> = ({
@@ -24,7 +23,6 @@ const InputPassword: FC<FormInputProps> = ({
   placeholder,
   handleChange,
   handleBlur,
-  handleFocus,
 }) => {
   const { isScreenSm } = useResize();
 
@@ -40,7 +38,6 @@ const InputPassword: FC<FormInputProps> = ({
       placeholder={placeholder}
       onChange={handleChange}
       onBlur={handleBlur}
-      onFocus={handleFocus}
     />
   );
 };

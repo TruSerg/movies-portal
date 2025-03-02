@@ -15,39 +15,45 @@ import CustomModal from "../../../../components/Modal";
 import CustomUnstyledButton from "../../../../components/Buttons/UnstyledButton";
 
 interface SignUpPageLayoutProps {
-  isModalOpen: boolean;
-  isFocus: boolean;
   isVisible: boolean;
   isFormValid: boolean;
   isUserNameValid: boolean;
   isPasswordValid: boolean;
   isPasswordConfirmValid: boolean;
+  isModalOpen: boolean;
+  isInputNameFocus: boolean;
+  isInputPasswordFocus: boolean;
+  isInputConfirmPasswordFocus: boolean;
   errorMessage: string;
   formData: ISignUpFormData;
   handleFormFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleFormSubmit: (e: globalThis.KeyboardEvent) => void;
-  checkInputFormBlur: () => void;
-  checkInputFormFocus: () => void;
   handleModalClose: () => void;
   handleGoToSignIn: () => void;
+  checkInputNameBlur: () => void;
+  checkInputPasswordBlur: () => void;
+  checkInputConfirmPasswordBlur: () => void;
 }
 
 const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
-  isModalOpen,
-  isFocus,
   isVisible,
   isFormValid,
   isUserNameValid,
   isPasswordValid,
   isPasswordConfirmValid,
+  isModalOpen,
+  isInputNameFocus,
+  isInputPasswordFocus,
+  isInputConfirmPasswordFocus,
   errorMessage,
   formData,
   handleFormFieldChange,
   handleFormSubmit,
-  checkInputFormBlur,
-  checkInputFormFocus,
   handleModalClose,
   handleGoToSignIn,
+  checkInputNameBlur,
+  checkInputPasswordBlur,
+  checkInputConfirmPasswordBlur,
 }) => {
   return (
     <>
@@ -69,11 +75,12 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
             name="userName"
             type="text"
             label="Имя"
-            error={isFocus ? (isUserNameValid ? "" : "Заполните поле!") : ""}
+            error={
+              isInputNameFocus ? (isUserNameValid ? "" : "Заполните поле!") : ""
+            }
             placeholder="Имя..."
             handleChange={handleFormFieldChange}
-            handleBlur={checkInputFormBlur}
-            handleFocus={checkInputFormFocus}
+            handleBlur={checkInputNameBlur}
           />
           <InputPassword
             value={formData.password}
@@ -81,7 +88,7 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
             type="password"
             label="Пароль"
             error={
-              isFocus
+              isInputPasswordFocus
                 ? isPasswordValid
                   ? ""
                   : "Пароль должен иметь не менее трёх символов!"
@@ -89,8 +96,7 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
             }
             placeholder="Пароль..."
             handleChange={handleFormFieldChange}
-            handleBlur={checkInputFormBlur}
-            handleFocus={checkInputFormFocus}
+            handleBlur={checkInputPasswordBlur}
           />
           <InputPassword
             value={formData.passwordConfirm}
@@ -98,7 +104,7 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
             type="password"
             label="Подтвердить пароль"
             error={
-              isFocus
+              isInputConfirmPasswordFocus
                 ? isPasswordConfirmValid
                   ? ""
                   : "Пароли не совпадают!"
@@ -106,8 +112,7 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
             }
             placeholder="Подтвердить пароль..."
             handleChange={handleFormFieldChange}
-            handleBlur={checkInputFormBlur}
-            handleFocus={checkInputFormFocus}
+            handleBlur={checkInputConfirmPasswordBlur}
           />
           <CustomButton
             form="SignUpForm"

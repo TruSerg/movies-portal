@@ -22,12 +22,13 @@ const SignInPageContainer = () => {
 
   const { isVisible, handleVisible, handleHidden } = useVisible();
   const {
-    isFocus,
+    isInputNameFocus,
+    isInputPasswordFocus,
     formData,
     handleFormFieldChange,
     handleFormReset,
-    checkInputFormBlur,
-    checkInputFormFocus,
+    checkInputNameBlur,
+    checkInputPasswordBlur,
   } = useForm({
     userName: "",
     password: "",
@@ -83,17 +84,18 @@ const SignInPageContainer = () => {
 
   return (
     <SignInPageLayout
-      isFocus={isFocus}
       isVisible={isVisible}
       isFormValid={isFormValid}
       isUserNameValid={isUserNameValid}
       isPasswordValid={isPasswordValid}
+      isInputNameFocus={isInputNameFocus}
+      isInputPasswordFocus={isInputPasswordFocus}
       errorMessage={errorMessage}
       formData={formData}
       handleFormFieldChange={handleFormFieldChange}
       handleFormSubmit={handleFormSubmit}
-      checkInputFormBlur={checkInputFormBlur}
-      checkInputFormFocus={checkInputFormFocus}
+      checkInputNameBlur={checkInputNameBlur}
+      checkInputPasswordBlur={checkInputPasswordBlur}
     />
   );
 };

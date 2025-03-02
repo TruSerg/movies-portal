@@ -2,7 +2,10 @@ import { useState, ChangeEvent } from "react";
 
 const useForm = (initialFormData: any) => {
   const [formData, setFormData] = useState(initialFormData);
-  const [isFocus, setIsFocus] = useState(false);
+  const [isInputNameFocus, setIsInputNameFocus] = useState(false);
+  const [isInputPasswordFocus, setIsInputPasswordFocus] = useState(false);
+  const [isInputConfirmPasswordFocus, setIsInputConfirmPasswordFocus] =
+    useState(false);
 
   const handleFormFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((state: any) => {
@@ -19,21 +22,28 @@ const useForm = (initialFormData: any) => {
     setFormData(initialFormData);
   };
 
-  const checkInputFormBlur = () => {
-    setIsFocus(false);
+  const checkInputNameBlur = () => {
+    setIsInputNameFocus(true);
   };
 
-  const checkInputFormFocus = () => {
-    setIsFocus(true);
+  const checkInputPasswordBlur = () => {
+    setIsInputPasswordFocus(true);
+  };
+
+  const checkInputConfirmPasswordBlur = () => {
+    setIsInputConfirmPasswordFocus(true);
   };
 
   return {
-    isFocus,
     formData,
+    isInputNameFocus,
+    isInputPasswordFocus,
+    isInputConfirmPasswordFocus,
+    checkInputNameBlur,
+    checkInputPasswordBlur,
+    checkInputConfirmPasswordBlur,
     handleFormFieldChange,
     handleFormReset,
-    checkInputFormBlur,
-    checkInputFormFocus,
   };
 };
 

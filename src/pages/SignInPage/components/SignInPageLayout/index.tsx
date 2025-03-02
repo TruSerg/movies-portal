@@ -12,30 +12,33 @@ import Heading from "../../../../components/Heading";
 import InputPassword from "../../../../components/Inputs/FormInputs/InputPassword";
 
 interface SignInPageLayoutProps {
-  isFocus: boolean;
   isVisible: boolean;
   isFormValid: boolean;
   isUserNameValid: boolean;
   isPasswordValid: boolean;
+  isInputNameFocus: boolean;
+  isInputPasswordFocus: boolean;
+
   errorMessage: string;
   formData: ISignUpFormData;
   handleFormFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleFormSubmit: (e: globalThis.KeyboardEvent) => void;
-  checkInputFormBlur: () => void;
-  checkInputFormFocus: () => void;
+  checkInputNameBlur: () => void;
+  checkInputPasswordBlur: () => void;
 }
 const SignInPageLayout: FC<SignInPageLayoutProps> = ({
-  isFocus,
   isVisible,
   isFormValid,
   isUserNameValid,
   isPasswordValid,
+  isInputNameFocus,
+  isInputPasswordFocus,
   errorMessage,
   formData,
   handleFormFieldChange,
   handleFormSubmit,
-  checkInputFormBlur,
-  checkInputFormFocus,
+  checkInputNameBlur,
+  checkInputPasswordBlur,
 }) => {
   return (
     <main className="m-auto flex min-h-[80vh] w-full max-w-[1010px] flex-col items-center justify-center pb-10 pl-[15px] pr-[15px] pt-10 xl:pb-5 xl:pt-5 lg:text-[28px] sm:text-[24px]">
@@ -56,11 +59,12 @@ const SignInPageLayout: FC<SignInPageLayoutProps> = ({
           name="userName"
           type="text"
           label="Имя"
-          error={isFocus ? (isUserNameValid ? "" : "Заполните поле!") : ""}
+          error={
+            isInputNameFocus ? (isUserNameValid ? "" : "Заполните поле!") : ""
+          }
           placeholder="Имя..."
           handleChange={handleFormFieldChange}
-          handleBlur={checkInputFormBlur}
-          handleFocus={checkInputFormFocus}
+          handleBlur={checkInputNameBlur}
         />
         <InputPassword
           value={formData.password}
@@ -68,7 +72,7 @@ const SignInPageLayout: FC<SignInPageLayoutProps> = ({
           type="password"
           label="Пароль"
           error={
-            isFocus
+            isInputPasswordFocus
               ? isPasswordValid
                 ? ""
                 : "Пароль должен иметь не менее трёх символов!"
@@ -76,8 +80,7 @@ const SignInPageLayout: FC<SignInPageLayoutProps> = ({
           }
           placeholder="Пароль..."
           handleChange={handleFormFieldChange}
-          handleBlur={checkInputFormBlur}
-          handleFocus={checkInputFormFocus}
+          handleBlur={checkInputPasswordBlur}
         />
         <CustomButton
           form="SignUpForm"

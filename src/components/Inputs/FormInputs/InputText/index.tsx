@@ -12,7 +12,6 @@ interface InputTextProps {
   placeholder: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleBlur: () => void;
-  handleFocus: () => void;
 }
 
 const InputText: FC<InputTextProps> = ({
@@ -24,7 +23,6 @@ const InputText: FC<InputTextProps> = ({
   placeholder,
   handleChange,
   handleBlur,
-  handleFocus,
 }) => {
   const { isScreenSm } = useResize();
 
@@ -40,7 +38,6 @@ const InputText: FC<InputTextProps> = ({
       placeholder={placeholder}
       onChange={handleChange}
       onBlur={handleBlur}
-      onFocus={handleFocus}
     />
   );
 };
